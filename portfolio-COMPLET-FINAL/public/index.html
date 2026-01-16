@@ -6,34 +6,21 @@
   <meta name="description" content="Céline Harbane - Développeuse Fullstack spécialisée WordPress, Shopify, WooCommerce. +10 ans d'expérience, 39 projets réalisés.">
   <title>Céline Harbane | Développeuse Fullstack WordPress & Shopify</title>
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            primary: '#8b5cf6',
-            secondary: '#06b6d4',
-            dark: '#0a0a0f',
-            card: '#12121a',
-            cardhover: '#1a1a2e',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Playfair Display', 'Georgia', 'serif'],
-          }
+          colors: { primary: '#8b5cf6', secondary: '#06b6d4', dark: '#0a0a0f', card: '#12121a', cardhover: '#1a1a2e' },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], display: ['Playfair Display', 'Georgia', 'serif'] }
         }
       }
     }
   </script>
   
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="font-sans text-white min-h-screen bg-dark">
@@ -41,17 +28,16 @@
   <!-- Navigation -->
   <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
+      <a href="/" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
       
       <div class="hidden md:flex items-center gap-8">
-        <a href="index.html" class="text-white font-medium hover:text-purple-400 transition">Accueil</a>
-        <a href="projets.html" class="text-gray-400 hover:text-white transition">Projets</a>
-        <a href="competences.html" class="text-gray-400 hover:text-white transition">Compétences</a>
-        <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
-        <a href="contact.html" class="gradient-bg px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Me contacter</a>
+        <a href="/" class="text-white font-medium hover:text-purple-400 transition">Accueil</a>
+        <a href="/projets" class="text-gray-400 hover:text-white transition">Projets</a>
+        <a href="/competences" class="text-gray-400 hover:text-white transition">Compétences</a>
+        <a href="/contact" class="text-gray-400 hover:text-white transition">Contact</a>
+        <a href="/contact" class="gradient-bg px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Me contacter</a>
       </div>
       
-      <!-- Mobile menu button -->
       <button id="menu-btn" class="md:hidden text-white" aria-label="Ouvrir le menu de navigation">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -59,30 +45,26 @@
       </button>
     </div>
     
-    <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-      <a href="index.html" class="block py-2 text-white">Accueil</a>
-      <a href="projets.html" class="block py-2 text-gray-400">Projets</a>
-      <a href="competences.html" class="block py-2 text-gray-400">Compétences</a>
-      <a href="contact.html" class="block py-2 text-gray-400">Contact</a>
+      <a href="/" class="block py-2 text-white">Accueil</a>
+      <a href="/projets" class="block py-2 text-gray-400">Projets</a>
+      <a href="/competences" class="block py-2 text-gray-400">Compétences</a>
+      <a href="/contact" class="block py-2 text-gray-400">Contact</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="min-h-screen flex items-center pt-20 relative overflow-hidden">
-    <!-- Background effects -->
     <div class="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
     <div class="absolute bottom-1/4 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
     
     <div class="max-w-6xl mx-auto px-6 py-20">
       <div class="max-w-3xl">
-        <!-- Badge disponible -->
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 mb-8">
           <span class="w-2 h-2 bg-green-500 rounded-full pulse-glow"></span>
           <span class="text-green-400 text-sm font-medium">Disponible pour de nouveaux projets</span>
         </div>
         
-        <!-- Titre principal -->
         <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight">
           <span class="gradient-text">CÉLINE HARBANE</span><br>
           <span class="text-white">Développeuse Fullstack</span><br>
@@ -94,18 +76,16 @@
           Expertise WordPress, Shopify & WooCommerce avec <strong class="text-white">+10 ans d'expérience</strong>.
         </p>
         
-        <!-- Boutons CTA -->
         <div class="flex flex-wrap gap-4 mb-12">
-          <a href="projets.html" class="gradient-bg px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30 transition-all flex items-center gap-2">
+          <a href="/projets" class="gradient-bg px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30 transition-all flex items-center gap-2">
             Voir mes projets
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </a>
-          <a href="contact.html" class="px-8 py-4 rounded-full font-semibold text-lg border border-gray-700 hover:border-purple-500 hover:bg-purple-500/10 transition-all">
+          <a href="/contact" class="px-8 py-4 rounded-full font-semibold text-lg border border-gray-700 hover:border-purple-500 hover:bg-purple-500/10 transition-all">
             Discutons de votre projet
           </a>
         </div>
         
-        <!-- Stats -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-gray-800">
           <div class="text-center">
             <div class="text-3xl md:text-4xl font-bold gradient-text">39+</div>
@@ -138,28 +118,24 @@
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Service 1 -->
         <div class="card-glass rounded-2xl p-6 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 group">
           <div class="text-4xl mb-4">🛒</div>
           <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-purple-400 transition">E-commerce</h3>
           <p class="text-gray-400 text-sm leading-relaxed">Boutiques Shopify & WooCommerce. Migration, optimisation des conversions et paiement.</p>
         </div>
         
-        <!-- Service 2 -->
         <div class="card-glass rounded-2xl p-6 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 group">
           <div class="text-4xl mb-4">🌐</div>
           <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-purple-400 transition">Sites WordPress</h3>
           <p class="text-gray-400 text-sm leading-relaxed">Sites vitrines et corporate sur mesure. Thèmes personnalisés et optimisation SEO.</p>
         </div>
         
-        <!-- Service 3 -->
         <div class="card-glass rounded-2xl p-6 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 group">
           <div class="text-4xl mb-4">⚡</div>
           <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-purple-400 transition">Applications Web</h3>
           <p class="text-gray-400 text-sm leading-relaxed">Apps modernes React & Node.js. API, bases de données et intégrations sur mesure.</p>
         </div>
         
-        <!-- Service 4 -->
         <div class="card-glass rounded-2xl p-6 hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 group">
           <div class="text-4xl mb-4">🔧</div>
           <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-purple-400 transition">Maintenance</h3>
@@ -179,7 +155,6 @@
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Projet GoFast -->
         <div class="card-glass rounded-2xl overflow-hidden group hover:border-purple-500/50 transition-all duration-300">
           <div class="h-48 bg-gradient-to-br from-indigo-900 to-purple-900 flex items-center justify-center relative overflow-hidden">
             <div class="text-6xl group-hover:scale-110 transition-transform duration-500">⚡</div>
@@ -200,7 +175,6 @@
           </div>
         </div>
         
-        <!-- Projet Germaine des Prés -->
         <div class="card-glass rounded-2xl overflow-hidden group hover:border-purple-500/50 transition-all duration-300">
           <div class="h-48 bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center relative overflow-hidden">
             <div class="text-6xl group-hover:scale-110 transition-transform duration-500">🌸</div>
@@ -220,7 +194,6 @@
           </div>
         </div>
         
-        <!-- Projet Louis Gabriel Nouchi -->
         <div class="card-glass rounded-2xl overflow-hidden group hover:border-purple-500/50 transition-all duration-300">
           <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative overflow-hidden">
             <div class="text-6xl group-hover:scale-110 transition-transform duration-500">👔</div>
@@ -242,7 +215,7 @@
       </div>
       
       <div class="text-center mt-12">
-        <a href="projets.html" class="gradient-bg px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2 hover:scale-105 transition-transform">
+        <a href="/projets" class="gradient-bg px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2 hover:scale-105 transition-transform">
           Voir tous les projets <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
@@ -304,7 +277,7 @@
       <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Un projet en tête ?</h2>
       <p class="text-gray-400 text-xl mb-8">Discutons de votre projet et voyons comment je peux vous aider à le concrétiser.</p>
       <div class="flex flex-wrap justify-center gap-4">
-        <a href="contact.html" class="gradient-bg px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform">Démarrer un projet</a>
+        <a href="/contact" class="gradient-bg px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform">Démarrer un projet</a>
         <a href="https://www.codeur.com/-d-rik75paris" target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-full font-semibold text-lg border border-gray-700 hover:border-purple-500 transition">Voir mon profil Codeur.com</a>
       </div>
     </div>
@@ -314,13 +287,13 @@
   <footer class="py-12 border-t border-gray-800">
     <div class="max-w-6xl mx-auto px-6">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <a href="index.html" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
+        <a href="/" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
         
         <div class="flex gap-6">
-          <a href="index.html" class="text-gray-400 hover:text-white transition">Accueil</a>
-          <a href="projets.html" class="text-gray-400 hover:text-white transition">Projets</a>
-          <a href="competences.html" class="text-gray-400 hover:text-white transition">Compétences</a>
-          <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
+          <a href="/" class="text-gray-400 hover:text-white transition">Accueil</a>
+          <a href="/projets" class="text-gray-400 hover:text-white transition">Projets</a>
+          <a href="/competences" class="text-gray-400 hover:text-white transition">Compétences</a>
+          <a href="/contact" class="text-gray-400 hover:text-white transition">Contact</a>
         </div>
         
         <div class="flex gap-4">
@@ -336,7 +309,6 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="main.js"></script>
 </body>
 </html>
