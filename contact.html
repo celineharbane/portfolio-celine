@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contactez Céline Harbane - Développeuse Fullstack WordPress, Shopify. Devis gratuit.">
+  <title>Contact | Céline Harbane</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: '#8b5cf6', secondary: '#06b6d4', dark: '#0a0a0f', card: '#12121a' },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], display: ['Playfair Display', 'Georgia', 'serif'] }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans text-white min-h-screen bg-dark">
+
+  <!-- Navigation -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="text-gray-400 hover:text-white transition">Accueil</a>
+        <a href="projets.html" class="text-gray-400 hover:text-white transition">Projets</a>
+        <a href="competences.html" class="text-gray-400 hover:text-white transition">Compétences</a>
+        <a href="contact.html" class="text-white font-medium hover:text-purple-400 transition">Contact</a>
+        <a href="contact.html" class="gradient-bg px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Me contacter</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white" aria-label="Ouvrir le menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+      <a href="index.html" class="block py-2 text-gray-400">Accueil</a>
+      <a href="projets.html" class="block py-2 text-gray-400">Projets</a>
+      <a href="competences.html" class="block py-2 text-gray-400">Compétences</a>
+      <a href="contact.html" class="block py-2 text-white">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="pt-32 pb-8">
+    <div class="max-w-6xl mx-auto px-6">
+      <span class="inline-block px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">Contact</span>
+      <h1 class="font-display text-5xl md:text-6xl font-bold mb-4"><span class="gradient-text">CÉLINE HARBANE</span></h1>
+      <p class="text-2xl text-gray-400 mb-6">Travaillons Ensemble</p>
+      <p class="text-gray-500 max-w-2xl">Un projet en tête ? Je suis disponible pour discuter de vos besoins.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-5 gap-12">
+        
+        <!-- Contact Info -->
+        <div class="lg:col-span-2 space-y-6">
+          <div>
+            <h2 class="font-display text-2xl font-bold mb-2">Développeuse Web & Mobile</h2>
+            <p class="text-purple-400 font-medium mb-4">Fullstack • WordPress • Shopify • React</p>
+            <p class="text-gray-400 leading-relaxed">Basée dans l'Oise, je travaille en présentiel ou télétravail.</p>
+          </div>
+          
+          <!-- Contact Methods -->
+          <div class="space-y-4">
+            <a href="mailto:harbaneceline@gmail.com" class="card-glass rounded-xl p-4 flex items-center gap-4 hover:border-purple-500/50 transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">✉️</div>
+              <div>
+                <div class="text-gray-500 text-sm">Email</div>
+                <div class="font-medium">harbaneceline@gmail.com</div>
+              </div>
+            </a>
+            
+            <a href="tel:+33666461363" class="card-glass rounded-xl p-4 flex items-center gap-4 hover:border-purple-500/50 transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📱</div>
+              <div>
+                <div class="text-gray-500 text-sm">Téléphone</div>
+                <div class="font-medium">06 66 46 13 63</div>
+              </div>
+            </a>
+            
+            <div class="card-glass rounded-xl p-4 flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-2xl">📍</div>
+              <div>
+                <div class="text-gray-500 text-sm">Localisation</div>
+                <div class="font-medium">Sérifontaine (60) - Oise</div>
+              </div>
+            </div>
+            
+            <a href="https://www.linkedin.com/in/celineharbane/" target="_blank" rel="noopener noreferrer" class="card-glass rounded-xl p-4 flex items-center gap-4 hover:border-purple-500/50 transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔗</div>
+              <div>
+                <div class="text-gray-500 text-sm">LinkedIn</div>
+                <div class="font-medium">linkedin.com/in/celineharbane</div>
+              </div>
+            </a>
+            
+            <a href="https://www.codeur.com/-d-rik75paris" target="_blank" rel="noopener noreferrer" class="card-glass rounded-xl p-4 flex items-center gap-4 hover:border-purple-500/50 transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">💼</div>
+              <div>
+                <div class="text-gray-500 text-sm">Codeur.com</div>
+                <div class="font-medium">39 projets • 4.79/5 ⭐</div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Disponibilité -->
+          <div class="card-glass rounded-xl p-6 border-green-500/30">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-3 h-3 bg-green-500 rounded-full pulse-glow"></span>
+              <span class="text-green-400 font-semibold">Disponible immédiatement</span>
+            </div>
+            <p class="text-gray-400 text-sm">CDI, CDD, Freelance ou Mission ponctuelle.</p>
+          </div>
+        </div>
+        
+        <!-- Contact Form avec Web3Forms -->
+        <div class="lg:col-span-3">
+          <div class="card-glass rounded-3xl p-8">
+            <h3 class="font-display text-xl font-bold mb-2">Envoyez-moi un message</h3>
+            <p class="text-gray-500 text-sm mb-6">Je vous réponds sous 24h maximum.</p>
+            
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-5">
+              
+              <!-- Web3Forms Config -->
+              <input type="hidden" name="access_key" value="50cb5976-484e-493c-ba4b-3f9c3bd2e695">
+              <input type="hidden" name="subject" value="📩 Nouveau message depuis votre Portfolio">
+              <input type="hidden" name="from_name" value="Portfolio Céline Harbane">
+              <input type="hidden" name="redirect" value="https://web3forms.com/success">
+              
+              <!-- Honeypot Anti-Spam -->
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+              
+              <!-- Name & Email -->
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="name" class="block text-sm font-medium mb-2">Nom complet *</label>
+                  <input type="text" id="name" name="name" required minlength="2" class="form-input w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition placeholder-gray-600" placeholder="Votre nom">
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium mb-2">Email *</label>
+                  <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition placeholder-gray-600" placeholder="votre@email.com">
+                </div>
+              </div>
+              
+              <!-- Company & Phone -->
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label for="company" class="block text-sm font-medium mb-2">Entreprise</label>
+                  <input type="text" id="company" name="company" class="form-input w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition placeholder-gray-600" placeholder="Nom de votre entreprise">
+                </div>
+                <div>
+                  <label for="phone" class="block text-sm font-medium mb-2">Téléphone</label>
+                  <input type="tel" id="phone" name="phone" class="form-input w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition placeholder-gray-600" placeholder="06 12 34 56 78">
+                </div>
+              </div>
+              
+              <!-- Project Type -->
+              <div>
+                <label for="project-type" class="block text-sm font-medium mb-2">Type de projet *</label>
+                <select id="project-type" name="Type de projet" required class="form-input w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition">
+                  <option value="" class="bg-gray-900">Sélectionnez un type</option>
+                  <option value="Site vitrine" class="bg-gray-900">Site vitrine</option>
+                  <option value="Boutique e-commerce" class="bg-gray-900">Boutique e-commerce</option>
+                  <option value="WordPress" class="bg-gray-900">WordPress</option>
+                  <option value="Shopify" class="bg-gray-900">Shopify</option>
+                  <option value="Application web" class="bg-gray-900">Application web</option>
+                  <option value="Maintenance" class="bg-gray-900">Maintenance</option>
+                  <option value="Recrutement CDI/CDD" class="bg-gray-900">Recrutement CDI/CDD</option>
+                  <option value="Autre" class="bg-gray-900">Autre</option>
+                </select>
+              </div>
+              
+              <!-- Budget -->
+              <div>
+                <label for="budget" class="block text-sm font-medium mb-2">Budget estimé</label>
+                <select id="budget" name="Budget" class="form-input w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition">
+                  <option value="Non précisé" class="bg-gray-900">Sélectionnez une fourchette</option>
+                  <option value="Moins de 1000€" class="bg-gray-900">Moins de 1 000 €</option>
+                  <option value="1000€ - 3000€" class="bg-gray-900">1 000 € - 3 000 €</option>
+                  <option value="3000€ - 5000€" class="bg-gray-900">3 000 € - 5 000 €</option>
+                  <option value="5000€ - 10000€" class="bg-gray-900">5 000 € - 10 000 €</option>
+                  <option value="Plus de 10000€" class="bg-gray-900">Plus de 10 000 €</option>
+                  <option value="À définir" class="bg-gray-900">À définir ensemble</option>
+                </select>
+              </div>
+              
+              <!-- Message -->
+              <div>
+                <label for="message" class="block text-sm font-medium mb-2">Votre message *</label>
+                <textarea id="message" name="message" required minlength="10" rows="5" class="form-input w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-purple-500 focus:outline-none transition placeholder-gray-600 resize-none" placeholder="Décrivez votre projet, vos besoins, vos délais..."></textarea>
+              </div>
+              
+              <!-- RGPD -->
+              <div class="flex items-start gap-3">
+                <input type="checkbox" id="consent" name="consent" required class="mt-1 w-4 h-4 accent-purple-500 rounded">
+                <label for="consent" class="text-gray-400 text-sm cursor-pointer">J'accepte que mes données soient utilisées pour me recontacter. Elles ne seront jamais partagées avec des tiers.</label>
+              </div>
+              
+              <!-- Submit -->
+              <button type="submit" class="w-full gradient-bg py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-2 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/30 transition-all">
+                Envoyer le message
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+            </form>
+            
+            <p class="text-center text-gray-500 text-sm mt-6">🔒 Vos données sont sécurisées et envoyées directement sur ma boîte mail.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Zone d'intervention -->
+  <section class="py-20 bg-card">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="inline-block px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">Zone d'intervention</span>
+        <h2 class="font-display text-4xl font-bold">Où je travaille</h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">🏠</div>
+          <h4 class="font-display font-semibold mb-2">Présentiel</h4>
+          <p class="text-gray-400 text-sm">Beauvais, Gisors, Cergy, Paris</p>
+        </div>
+        
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">💻</div>
+          <h4 class="font-display font-semibold mb-2">Télétravail</h4>
+          <p class="text-gray-400 text-sm">France et international</p>
+        </div>
+        
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">🚗</div>
+          <h4 class="font-display font-semibold mb-2">Mobilité</h4>
+          <p class="text-gray-400 text-sm">Permis B + véhicule</p>
+        </div>
+        
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">⏰</div>
+          <h4 class="font-display font-semibold mb-2">Réactivité</h4>
+          <p class="text-gray-400 text-sm">Réponse sous 24h</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <a href="index.html" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
+        <div class="flex gap-6">
+          <a href="index.html" class="text-gray-400 hover:text-white transition">Accueil</a>
+          <a href="projets.html" class="text-gray-400 hover:text-white transition">Projets</a>
+          <a href="competences.html" class="text-gray-400 hover:text-white transition">Compétences</a>
+          <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
+        </div>
+        <div class="flex gap-4">
+          <a href="https://www.codeur.com/-d-rik75paris" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="Codeur.com">💼</a>
+          <a href="https://www.linkedin.com/in/celineharbane/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="LinkedIn">🔗</a>
+          <a href="mailto:harbaneceline@gmail.com" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="Email">✉️</a>
+        </div>
+      </div>
+      <div class="text-center text-gray-500 text-sm mt-8 pt-8 border-t border-gray-800">© 2024 Céline Harbane. | 28 Rue Alexandre Barbier, 60590 Sérifontaine</div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
