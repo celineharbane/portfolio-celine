@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-celine-harbane",
+  "version": "1.0.0",
+  "description": "Portfolio de Céline Harbane - Développeuse Fullstack",
+  "author": "Céline Harbane",
+  "scripts": {
+    "dev": "npx live-server public --port=3000",
+    "start": "npx live-server public --port=3000"
+  }
+}

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compétences techniques de Céline Harbane - HTML, CSS, JavaScript, React, Node.js, PHP, WordPress, Shopify.">
+  <title>Compétences & Technologies | Céline Harbane</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { primary: '#8b5cf6', secondary: '#06b6d4', dark: '#0a0a0f', card: '#12121a' },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], display: ['Playfair Display', 'Georgia', 'serif'] }
+        }
+      }
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans text-white min-h-screen bg-dark">
+
+  <!-- Navigation -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="index.html" class="text-gray-400 hover:text-white transition">Accueil</a>
+        <a href="projets.html" class="text-gray-400 hover:text-white transition">Projets</a>
+        <a href="competences.html" class="text-white font-medium hover:text-purple-400 transition">Compétences</a>
+        <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
+        <a href="contact.html" class="gradient-bg px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Me contacter</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white" aria-label="Ouvrir le menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+      <a href="index.html" class="block py-2 text-gray-400">Accueil</a>
+      <a href="projets.html" class="block py-2 text-gray-400">Projets</a>
+      <a href="competences.html" class="block py-2 text-white">Compétences</a>
+      <a href="contact.html" class="block py-2 text-gray-400">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="pt-32 pb-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <span class="inline-block px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">Stack Technique</span>
+      <h1 class="font-display text-5xl md:text-6xl font-bold mb-4"><span class="gradient-text">CÉLINE HARBANE</span></h1>
+      <p class="text-2xl text-gray-400 mb-6">Mes Compétences</p>
+      <p class="text-gray-500 max-w-2xl">+10 ans d'expérience. Spécialisée e-commerce et applications modernes.</p>
+    </div>
+  </section>
+
+  <!-- Skills Grid -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 gap-8">
+        
+        <!-- Frontend -->
+        <div class="card-glass rounded-3xl p-8">
+          <h3 class="font-display text-xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center text-xl">🎨</span>
+            Frontend
+          </h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-xs font-bold">H5</span><span class="font-medium">HTML5</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-95"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-xs font-bold">CSS</span><span class="font-medium">CSS3 / SASS / Tailwind</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-95"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-yellow-400 flex items-center justify-center text-xs font-bold text-black">JS</span><span class="font-medium">JavaScript ES6+</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-90"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-lg">⚛️</span><span class="font-medium">React</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-80"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center text-xs font-bold">B</span><span class="font-medium">Bootstrap</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-90"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="card-glass rounded-3xl p-8">
+          <h3 class="font-display text-xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center text-xl">⚙️</span>
+            Backend
+          </h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center text-xs font-bold">PHP</span><span class="font-medium">PHP 7/8</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-90"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-green-600 flex items-center justify-center text-lg">🟢</span><span class="font-medium">Node.js</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-80"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-gray-700 flex items-center justify-center text-xs font-bold">Ex</span><span class="font-medium">Express.js</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-80"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-lg">🗃️</span><span class="font-medium">MySQL / PostgreSQL</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-85"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-lg">⚡</span><span class="font-medium">Supabase</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-75"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CMS & E-commerce -->
+        <div class="card-glass rounded-3xl p-8">
+          <h3 class="font-display text-xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">🛒</span>
+            CMS & E-commerce
+          </h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-blue-700 flex items-center justify-center text-xs font-bold">WP</span><span class="font-medium">WordPress</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-95"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-purple-700 flex items-center justify-center text-xs font-bold">WC</span><span class="font-medium">WooCommerce</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-95"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center text-lg">🛍️</span><span class="font-medium">Shopify / Liquid</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-90"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-pink-600 flex items-center justify-center text-xs font-bold">PS</span><span class="font-medium">Prestashop</span></span>
+                <span class="text-amber-400 text-sm">Intermédiaire</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-75"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-cyan-600 flex items-center justify-center text-xs font-bold">ACF</span><span class="font-medium">ACF Pro / Elementor</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-95"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outils & DevOps -->
+        <div class="card-glass rounded-3xl p-8">
+          <h3 class="font-display text-xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center text-xl">🔧</span>
+            Outils & DevOps
+          </h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center text-xs font-bold">Git</span><span class="font-medium">Git / GitHub</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-85"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-pink-500 flex items-center justify-center text-lg">🎨</span><span class="font-medium">Figma</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-80"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-xs font-bold">VS</span><span class="font-medium">VS Code</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-95"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center text-lg">📊</span><span class="font-medium">Google Analytics</span></span>
+                <span class="text-cyan-400 text-sm">Avancé</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-85"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2">
+                <span class="flex items-center gap-3"><span class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-lg">🔍</span><span class="font-medium">SEO</span></span>
+                <span class="text-purple-400 text-sm">Expert</span>
+              </div>
+              <div class="h-2 bg-gray-800 rounded-full overflow-hidden"><div class="skill-bar h-full rounded-full skill-bar-90"></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Other Skills -->
+      <div class="card-glass rounded-3xl p-8 mt-8 text-center">
+        <h3 class="font-display text-xl font-bold mb-6">Autres compétences</h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">jQuery</span>
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">AJAX</span>
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">API REST</span>
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">Responsive</span>
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">UI/UX</span>
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">Stripe</span>
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">PayPal</span>
+          <span class="px-4 py-2 bg-cyan-500/10 rounded-full text-cyan-300 text-sm hover:bg-cyan-500/20 transition">IA / Claude</span>
+          <span class="px-4 py-2 bg-purple-500/10 rounded-full text-purple-300 text-sm hover:bg-purple-500/20 transition">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="py-20 bg-card">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="inline-block px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">Formation</span>
+        <h2 class="font-display text-4xl font-bold">Certifications & Parcours</h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">🎓</div>
+          <h4 class="font-display font-semibold mb-2">Certification AFCI</h4>
+          <p class="text-purple-400 text-sm mb-2">Développeur Web et App</p>
+          <p class="text-gray-500 text-sm">Formation fullstack React, Node.js</p>
+        </div>
+        
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">💼</div>
+          <h4 class="font-display font-semibold mb-2">5 ans Chef de Projet</h4>
+          <p class="text-purple-400 text-sm mb-2">W6 - Agence Digitale</p>
+          <p class="text-gray-500 text-sm">Gestion projets, coordination</p>
+        </div>
+        
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">🛍️</div>
+          <h4 class="font-display font-semibold mb-2">Expert Shopify</h4>
+          <p class="text-purple-400 text-sm mb-2">Partenaire Codeur.com</p>
+          <p class="text-gray-500 text-sm">Création et migration boutiques</p>
+        </div>
+        
+        <div class="card-glass rounded-2xl p-6 text-center hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="text-5xl mb-4">⭐</div>
+          <h4 class="font-display font-semibold mb-2">39 Projets</h4>
+          <p class="text-purple-400 text-sm mb-2">4.79/5 - 24 avis</p>
+          <p class="text-gray-500 text-sm">100% satisfaction client</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-display text-4xl font-bold mb-6">Besoin de ces compétences ?</h2>
+      <p class="text-gray-400 text-xl mb-8">Discutons de votre projet.</p>
+      <a href="contact.html" class="gradient-bg px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2 hover:scale-105 transition-transform">Me contacter →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <a href="index.html" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
+        <div class="flex gap-6">
+          <a href="index.html" class="text-gray-400 hover:text-white transition">Accueil</a>
+          <a href="projets.html" class="text-gray-400 hover:text-white transition">Projets</a>
+          <a href="competences.html" class="text-gray-400 hover:text-white transition">Compétences</a>
+          <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
+        </div>
+        <div class="flex gap-4">
+          <a href="https://www.codeur.com/-d-rik75paris" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="Codeur.com">💼</a>
+          <a href="https://www.linkedin.com/in/celineharbane/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="LinkedIn">🔗</a>
+          <a href="mailto:harbaneceline@gmail.com" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="Email">✉️</a>
+        </div>
+      </div>
+      <div class="text-center text-gray-500 text-sm mt-8 pt-8 border-t border-gray-800">© 2024 Céline Harbane. Tous droits réservés.</div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
