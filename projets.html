@@ -1,38 +1,58 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Céline Harbane - Mes projets et réalisations web.">
-  <title>Projets | Céline Harbane</title>
+  <meta name="description" content="Portfolio de Céline Harbane - Découvrez mes réalisations : sites e-commerce, applications web, migrations Shopify.">
+  <title>Projets & Réalisations | Céline Harbane</title>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#8b5cf6',
+            secondary: '#06b6d4',
+            dark: '#0a0a0f',
+            card: '#12121a',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Playfair Display', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    body { background: #0a0a0f; font-family: 'Inter', sans-serif; }
-    .font-display { font-family: 'Playfair Display', serif; }
-    .gradient-text { background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    body { background: #0a0a0f; }
+    .gradient-text { background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .gradient-bg { background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%); }
-    .nav-glass { background: rgba(18, 18, 26, 0.9); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .card-glass { background: rgba(18, 18, 26, 0.8); border: 1px solid rgba(255,255,255,0.1); }
-    .card-glass:hover { border-color: rgba(139, 92, 246, 0.5); }
+    .glass { background: rgba(18, 18, 26, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
   </style>
 </head>
-<body class="text-white min-h-screen">
+<body class="font-sans text-white min-h-screen">
 
   <!-- Navigation -->
-  <nav class="nav-glass fixed top-0 left-0 right-0 z-50">
+  <nav class="fixed top-0 left-0 right-0 z-50 glass">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="index.html" class="font-display text-2xl font-bold gradient-text">Céline.dev</a>
       <div class="hidden md:flex items-center gap-8">
         <a href="index.html" class="text-gray-400 hover:text-white transition">Accueil</a>
-        <a href="projets.html" class="text-white font-medium">Projets</a>
+        <a href="projets.html" class="text-white font-medium hover:text-purple-400 transition">Projets</a>
         <a href="competences.html" class="text-gray-400 hover:text-white transition">Compétences</a>
         <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
         <a href="contact.html" class="gradient-bg px-6 py-2 rounded-full font-semibold hover:scale-105 transition-transform">Me contacter</a>
       </div>
-      <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden text-white" aria-label="Menu">
+      <button id="menu-btn" class="md:hidden text-white">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
@@ -48,18 +68,27 @@
   <section class="pt-32 pb-12">
     <div class="max-w-6xl mx-auto px-6">
       <span class="inline-block px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4">Portfolio</span>
-      <h1 class="font-display text-5xl md:text-6xl font-bold mb-4"><span class="gradient-text">Mes Projets</span></h1>
-      <p class="text-gray-400 max-w-2xl">+39 projets réalisés pour des marques de luxe, startups et entrepreneurs.</p>
+      <h1 class="font-display text-5xl md:text-6xl font-bold mb-4">
+        <span class="gradient-text">CÉLINE HARBANE</span>
+      </h1>
+      <p class="text-2xl text-gray-400 mb-6">Mes Projets & Réalisations</p>
+      <p class="text-gray-500 max-w-2xl">+39 projets réalisés pour des marques de luxe, startups et entrepreneurs. Spécialiste e-commerce et développement sur mesure.</p>
     </div>
   </section>
 
-  <!-- Featured Project -->
+  <!-- Projects Grid -->
   <section class="py-12">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="card-glass rounded-3xl overflow-hidden mb-8">
+      
+      <!-- Featured Project - GoFast -->
+      <div class="glass rounded-3xl overflow-hidden mb-8 group hover:border-purple-500/50 transition-all duration-300">
         <div class="grid lg:grid-cols-2">
-          <div class="h-64 lg:h-auto bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
-            <span class="text-8xl">⚡</span>
+          <div class="h-64 lg:h-auto bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center relative">
+            <div class="text-8xl group-hover:scale-110 transition-transform duration-500">⚡</div>
+            <div class="absolute bottom-6 left-6">
+              <div class="text-4xl font-display font-bold">GoFast</div>
+              <p class="text-purple-200">Application SaaS de Jeûne Intermittent</p>
+            </div>
           </div>
           <div class="p-8 lg:p-12 flex flex-col justify-center">
             <div class="flex flex-wrap gap-2 mb-6">
@@ -67,128 +96,250 @@
               <span class="px-3 py-1 bg-cyan-500/10 rounded-full text-cyan-400 text-sm">Node.js</span>
               <span class="px-3 py-1 bg-green-500/10 rounded-full text-green-400 text-sm">Supabase</span>
               <span class="px-3 py-1 bg-amber-500/10 rounded-full text-amber-400 text-sm">IA Claude</span>
+              <span class="px-3 py-1 bg-pink-500/10 rounded-full text-pink-400 text-sm">Vercel</span>
             </div>
-            <h2 class="font-display text-3xl font-bold mb-4">GoFast — Application de Jeûne Intermittent</h2>
-            <p class="text-gray-400 mb-6">Application SaaS complète avec intégration IA pour accompagner les utilisateurs dans leur parcours de jeûne intermittent.</p>
-            <a href="https://gofast-app.vercel.app" target="_blank" rel="noopener noreferrer" class="gradient-bg px-6 py-3 rounded-full font-semibold inline-flex items-center gap-2 w-fit hover:scale-105 transition-transform">
-              Voir l'application →
+            <h2 class="font-display text-2xl font-bold mb-4">GoFast — Application de Jeûne Intermittent</h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">Application SaaS complète avec intégration IA pour accompagner les utilisateurs dans leur parcours de jeûne intermittent. Suivi personnalisé, statistiques détaillées, conseils intelligents et interface moderne.</p>
+            <a href="https://gofast-app.vercel.app/dashboard" target="_blank" class="gradient-bg px-6 py-3 rounded-full font-semibold inline-flex items-center gap-2 w-fit hover:scale-105 transition-transform">
+              Voir l'application <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Grid -->
+      <!-- Projects Grid -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <div class="card-glass rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300">
-          <div class="h-48 bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center">
-            <span class="text-6xl">🌸</span>
+        <!-- Germaine des Prés -->
+        <div class="glass rounded-2xl overflow-hidden group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-48 bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center relative overflow-hidden">
+            <div class="text-6xl group-hover:scale-110 transition-transform duration-500">🌸</div>
+            <div class="absolute bottom-4 left-4 text-xl font-display font-bold text-amber-900">Germaine des Prés</div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Shopify</span>
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Migration</span>
+              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Luxe</span>
             </div>
             <h3 class="font-display text-lg font-semibold mb-2">Germaine des Prés</h3>
-            <p class="text-gray-400 text-sm mb-4">Migration Prestashop vers Shopify pour lingerie éco-responsable.</p>
-            <a href="https://www.germainedespres.com" target="_blank" rel="noopener noreferrer" class="text-purple-400 font-medium text-sm">Voir le site →</a>
+            <p class="text-gray-400 text-sm mb-4">Migration Prestashop vers Shopify pour une marque de lingerie éco-responsable parisienne.</p>
+            <a href="https://www.germainedespres.com/" target="_blank" class="text-purple-400 font-medium inline-flex items-center gap-2 hover:gap-3 transition-all text-sm">
+              Voir le site →
+            </a>
           </div>
         </div>
 
-        <div class="card-glass rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300">
-          <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-            <span class="text-6xl">👔</span>
+        <!-- Louis Gabriel Nouchi -->
+        <div class="glass rounded-2xl overflow-hidden group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative overflow-hidden">
+            <div class="text-6xl group-hover:scale-110 transition-transform duration-500">👔</div>
+            <div class="absolute bottom-4 left-4 text-xl font-display font-bold">Louis Gabriel Nouchi</div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">WooCommerce</span>
-              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">WordPress</span>
+              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">shopify</span>
+              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Migration Prestashop → Shopify</span>
+              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Fashion Week</span>
             </div>
             <h3 class="font-display text-lg font-semibold mb-2">Louis Gabriel Nouchi</h3>
-            <p class="text-gray-400 text-sm mb-4">E-commerce pour maison de mode Fashion Week.</p>
-            <a href="https://www.louisgabrielnouchi.com" target="_blank" rel="noopener noreferrer" class="text-purple-400 font-medium text-sm">Voir le site →</a>
+            <p class="text-gray-400 text-sm mb-4">Site e-commerce pour la maison de mode parisienne présentée à la Fashion Week.</p>
+            <a href="https://www.louisgabrielnouchi.com/" target="_blank" class="text-purple-400 font-medium inline-flex items-center gap-2 hover:gap-3 transition-all text-sm">
+              Voir le site →
+            </a>
           </div>
         </div>
 
-        <div class="card-glass rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300">
-          <div class="h-48 bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
-            <span class="text-6xl">🥗</span>
+        <!-- Quitoque -->
+        <div class="glass rounded-2xl overflow-hidden group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-48 bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center relative overflow-hidden">
+            <div class="text-6xl group-hover:scale-110 transition-transform duration-500">🥗</div>
+            <div class="absolute bottom-4 left-4 text-xl font-display font-bold">Quitoque</div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">JavaScript</span>
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Landing Page</span>
+              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Conversion</span>
             </div>
-            <h3 class="font-display text-lg font-semibold mb-2">Quitoque</h3>
-            <p class="text-gray-400 text-sm mb-4">Landing page interactive avec formulaire dynamique.</p>
-            <a href="https://www.quitoque.fr" target="_blank" rel="noopener noreferrer" class="text-purple-400 font-medium text-sm">Voir le site →</a>
+            <h3 class="font-display text-lg font-semibold mb-2">Quitoque — Landing Page</h3>
+            <p class="text-gray-400 text-sm mb-4">Landing page interactive avec formulaire de choix de prix dynamique en JavaScript.</p>
+            <a href="https://www.quitoque.fr/" target="_blank" class="text-purple-400 font-medium inline-flex items-center gap-2 hover:gap-3 transition-all text-sm">
+              Voir le site →
+            </a>
           </div>
         </div>
 
-        <div class="card-glass rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300">
-          <div class="h-48 bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center">
-            <span class="text-6xl">📈</span>
+        <!-- ConvertBoost -->
+        <div class="glass rounded-2xl overflow-hidden group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-48 bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center relative overflow-hidden">
+            <div class="text-6xl group-hover:scale-110 transition-transform duration-500">📈</div>
+            <div class="absolute bottom-4 left-4 text-xl font-display font-bold">ConvertBoost</div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Shopify App</span>
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">SaaS</span>
+              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">React</span>
             </div>
             <h3 class="font-display text-lg font-semibold mb-2">ConvertBoost</h3>
-            <p class="text-gray-400 text-sm mb-4">Application Shopify pour optimiser les conversions.</p>
-            <span class="text-amber-400 font-medium text-sm">🚧 En développement</span>
+            <p class="text-gray-400 text-sm mb-4">Application Shopify pour optimiser les conversions avec upselling et cross-selling intelligent.</p>
+            <span class="text-amber-400 font-medium inline-flex items-center gap-2 text-sm">
+              🚧 En développement
+            </span>
           </div>
         </div>
 
-        <div class="card-glass rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300">
-          <div class="h-48 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
-            <span class="text-6xl">🎓</span>
+        <!-- Hervé Coudière -->
+        <div class="glass rounded-2xl overflow-hidden group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300">
+          <div class="h-48 bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center relative overflow-hidden">
+            <div class="text-6xl group-hover:scale-110 transition-transform duration-500">🎓</div>
+            <div class="absolute bottom-4 left-4 text-xl font-display font-bold">HC Formation</div>
           </div>
           <div class="p-6">
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">WordPress</span>
+              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Formation</span>
               <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">CPF</span>
             </div>
-            <h3 class="font-display text-lg font-semibold mb-2">Hervé Coudière</h3>
-            <p class="text-gray-400 text-sm mb-4">Site de formation éligible CPF.</p>
-            <span class="text-green-400 font-medium text-sm">✅ Livré</span>
-          </div>
-        </div>
-
-        <div class="card-glass rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-300">
-          <div class="h-48 bg-gradient-to-br from-stone-400 to-stone-500 flex items-center justify-center">
-            <span class="text-6xl">🏺</span>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">E-commerce</span>
-              <span class="px-2 py-1 bg-purple-500/10 rounded-full text-purple-400 text-xs">Multilingue</span>
-            </div>
-            <h3 class="font-display text-lg font-semibold mb-2">Jocelyne Bosschot</h3>
-            <p class="text-gray-400 text-sm mb-4">Site e-commerce multilingue (FR/EN/JP).</p>
-            <span class="text-amber-400 font-medium text-sm">🚧 En développement</span>
+            <h3 class="font-display text-lg font-semibold mb-2">Hervé Coudière — Consultant</h3>
+            <p class="text-gray-400 text-sm mb-4">Site de formation éligible CPF avec système de gestion des inscriptions.</p>
+            <span class="text-green-400 font-medium inline-flex items-center gap-2 text-sm">
+              ✅ Livré
+            </span>
           </div>
         </div>
 
       </div>
 
-      <!-- Codeur.com -->
-      <div class="card-glass rounded-3xl p-8 md:p-12 mt-12 text-center">
-        <h3 class="font-display text-2xl font-bold mb-4">Retrouvez mes réalisations sur Codeur.com</h3>
-        <p class="text-gray-400 mb-6">39 projets réalisés • 4.79/5 sur 24 avis</p>
-        <a href="https://www.codeur.com/-d-rik75paris/portfolio" target="_blank" rel="noopener noreferrer" class="gradient-bg px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2 hover:scale-105 transition-transform">
-          Voir mon profil Codeur.com →
+      <!-- MODULES E-COMMERCE - DEMOS INTERACTIVES -->
+      <div class="mt-20 mb-12">
+        <div class="text-center mb-12">
+          <span class="inline-block px-4 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-4">Nouveau</span>
+          <h2 class="font-display text-4xl font-bold mb-4">
+            <span class="gradient-text">Modules E-commerce</span> Sur Mesure
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">Découvrez mes modules Shopify & WooCommerce en action. Chaque démo présente une simulation automatique avec calcul du ROI.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          
+          <!-- Upsell -->
+          <a href="demos/demo-upsell.html" class="glass rounded-2xl p-5 group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 block">
+            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🛒</div>
+            <h3 class="font-bold mb-2">Upsell & Cross-sell</h3>
+            <p class="text-gray-400 text-sm mb-3">Popups intelligents et bundles pour augmenter le panier moyen.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-green-400 text-sm font-bold">+35% panier</span>
+              <span class="text-purple-400 text-xs">▶️ Voir démo</span>
+            </div>
+          </a>
+          
+          <!-- Fidélité -->
+          <a href="demos/demo-fidelite.html" class="glass rounded-2xl p-5 group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 block">
+            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">👑</div>
+            <h3 class="font-bold mb-2">Programme Fidélité</h3>
+            <p class="text-gray-400 text-sm mb-3">Points, niveaux VIP et parrainage pour fidéliser vos clients.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-green-400 text-sm font-bold">+67% rétention</span>
+              <span class="text-purple-400 text-xs">▶️ Voir démo</span>
+            </div>
+          </a>
+          
+          <!-- Cart Recovery -->
+          <a href="demos/demo-cart-recovery.html" class="glass rounded-2xl p-5 group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 block">
+            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📧</div>
+            <h3 class="font-bold mb-2">Récupération Panier</h3>
+            <p class="text-gray-400 text-sm mb-3">Emails automatiques pour récupérer les paniers abandonnés.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-green-400 text-sm font-bold">+15% récupérés</span>
+              <span class="text-purple-400 text-xs">▶️ Voir démo</span>
+            </div>
+          </a>
+          
+          <!-- Configurateur -->
+          <a href="demos/demo-configurateur.html" class="glass rounded-2xl p-5 group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 block">
+            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🎨</div>
+            <h3 class="font-bold mb-2">Configurateur Produit</h3>
+            <p class="text-gray-400 text-sm mb-3">Personnalisation temps réel avec prix dynamique.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-green-400 text-sm font-bold">+96% panier</span>
+              <span class="text-purple-400 text-xs">▶️ Voir démo</span>
+            </div>
+          </a>
+          
+          <!-- Analytics -->
+          <a href="demos/demo-analytics.html" class="glass rounded-2xl p-5 group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 block">
+            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">📊</div>
+            <h3 class="font-bold mb-2">Dashboard Analytics</h3>
+            <p class="text-gray-400 text-sm mb-3">KPIs en temps réel et alertes intelligentes.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-green-400 text-sm font-bold">+45% décisions</span>
+              <span class="text-purple-400 text-xs">▶️ Voir démo</span>
+            </div>
+          </a>
+          
+          <!-- Reviews -->
+          <a href="demos/demo-reviews.html" class="glass rounded-2xl p-5 group hover:border-purple-500/50 hover:-translate-y-2 transition-all duration-300 block">
+            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">⭐</div>
+            <h3 class="font-bold mb-2">Système Avis</h3>
+            <p class="text-gray-400 text-sm mb-3">Collecte automatique d'avis avec photos clients.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-green-400 text-sm font-bold">+25% conversion</span>
+              <span class="text-purple-400 text-xs">▶️ Voir démo</span>
+            </div>
+          </a>
+          
+          <!-- SEO IA -->
+          <a href="demos/demo-seo-ia.html" class="glass rounded-2xl p-5 group hover:border-cyan-500/50 hover:-translate-y-2 transition-all duration-300 block border border-cyan-500/30 relative overflow-hidden">
+            <div class="absolute top-2 right-2 px-2 py-0.5 bg-cyan-500 text-black text-[10px] font-bold rounded-full">NEW</div>
+            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">🤖</div>
+            <h3 class="font-bold mb-2">SEO Intelligence IA</h3>
+            <p class="text-gray-400 text-sm mb-3">Analyse IA, mots-clés et génération de contenu SEO.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-cyan-400 text-sm font-bold">+156% trafic</span>
+              <span class="text-purple-400 text-xs">▶️ Voir démo</span>
+            </div>
+          </a>
+          
+          <!-- CTA Module -->
+          <a href="contact.html" class="glass rounded-2xl p-5 group hover:border-purple-500/50 transition-all duration-300 block bg-gradient-to-br from-purple-500/10 to-cyan-500/10 flex flex-col items-center justify-center text-center">
+            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-2xl mb-4">💬</div>
+            <h3 class="font-bold mb-2">Besoin d'un module ?</h3>
+            <p class="text-gray-400 text-sm mb-3">Contactez-moi pour un devis personnalisé.</p>
+            <span class="gradient-bg px-4 py-2 rounded-full text-sm font-semibold">Demander un devis</span>
+          </a>
+          
+        </div>
+      </div>
+
+      <!-- Codeur.com CTA -->
+      <div class="glass rounded-3xl p-8 md:p-12 mt-12 text-center">
+        <h3 class="font-display text-2xl font-bold mb-4">Retrouvez toutes mes réalisations sur Codeur.com</h3>
+        <p class="text-gray-400 mb-6 max-w-xl mx-auto">Consultez mon profil complet avec les 39 projets réalisés, les avis clients vérifiés et mes certifications.</p>
+        <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+          <span class="flex items-center gap-2"><span class="text-yellow-400">★★★★★</span> 4.79/5 sur 24 avis</span>
+          <span class="text-gray-500">•</span>
+          <span>39 projets terminés</span>
+          <span class="text-gray-500">•</span>
+          <span>Partenaire Expert Shopify</span>
+        </div>
+        <a href="https://www.codeur.com/-d-rik75paris/portfolio" target="_blank" class="gradient-bg px-8 py-4 rounded-full font-semibold inline-flex items-center gap-2 hover:scale-105 transition-transform">
+          Voir mon profil Codeur.com <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
       </div>
+
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="py-20 bg-[#12121a]">
+  <section class="py-20 bg-card">
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="font-display text-4xl font-bold mb-6">Vous avez un projet similaire ?</h2>
-      <p class="text-gray-400 text-xl mb-8">Discutons de vos besoins.</p>
-      <a href="contact.html" class="gradient-bg px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform">Démarrer un projet →</a>
+      <p class="text-gray-400 text-xl mb-8">Discutons de vos besoins et créons ensemble votre solution sur mesure.</p>
+      <a href="contact.html" class="gradient-bg px-8 py-4 rounded-full font-semibold text-lg inline-flex items-center gap-2 hover:scale-105 transition-transform">
+        Démarrer un projet →
+      </a>
     </div>
   </section>
 
@@ -204,14 +355,16 @@
           <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
         </div>
         <div class="flex gap-4">
-          <a href="https://www.codeur.com/-d-rik75paris" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="Codeur.com">💼</a>
-          <a href="https://www.linkedin.com/in/celineharbane/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="LinkedIn">🔗</a>
-          <a href="mailto:harbaneceline@gmail.com" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition" aria-label="Email">✉️</a>
+          <a href="https://www.codeur.com/-d-rik75paris" target="_blank" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition">💼</a>
+          <a href="https://www.linkedin.com/in/celineharbane/" target="_blank" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition">🔗</a>
+          <a href="/cdn-cgi/l/email-protection#422a233020232c2721272e2b2c2702252f232b2e6c212d2f" class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center hover:bg-purple-500/20 transition">✉️</a>
         </div>
       </div>
-      <div class="text-center text-gray-500 text-sm mt-8 pt-8 border-t border-gray-800">© 2024 Céline Harbane. Tous droits réservés.</div>
+      <div class="text-center text-gray-500 text-sm mt-8 pt-8 border-t border-gray-800">
+        © 2024 Céline Harbane. Tous droits réservés.
+      </div>
     </div>
   </footer>
 
-</body>
-</html>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    document.getElementById('menu-

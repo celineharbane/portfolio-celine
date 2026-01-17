@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Intelligence IA | Céline Harbane</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{background:#0a0a0f;font-family:system-ui,sans-serif}
+    .gradient-text{background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gradient-bg{background:linear-gradient(135deg,#8b5cf6,#06b6d4)}
+    .card-glass{background:rgba(18,18,26,0.8);border:1px solid rgba(255,255,255,0.1)}
+    .nav-glass{background:rgba(18,18,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1)}
+    .fade-in{animation:fadeIn 0.5s ease-out forwards}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .scale-in{animation:scaleIn 0.4s ease-out forwards}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+    .pulse-glow{animation:pulseGlow 2s infinite}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(139,92,246,0.3)}50%{box-shadow:0 0 40px rgba(139,92,246,0.6)}}
+    .narrator-box{background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(6,182,212,0.2));border:1px solid rgba(139,92,246,0.3)}
+    .typing{overflow:hidden;border-right:2px solid #8b5cf6;white-space:nowrap;animation:typing 2s steps(40) forwards,blink 0.8s infinite}
+    @keyframes typing{from{width:0}to{width:100%}}
+    @keyframes blink{50%{border-color:transparent}}
+    .score-ring{transition:stroke-dashoffset 1.5s ease-out}
+    .keyword-tag{animation:tagPop 0.3s ease-out}
+    @keyframes tagPop{from{transform:scale(0)}to{transform:scale(1)}}
+    .ai-thinking{animation:aiPulse 1.5s infinite}
+    @keyframes aiPulse{0%,100%{opacity:0.5}50%{opacity:1}}
+    .progress-bar{transition:width 1s ease-out}
+    .rank-up{animation:rankUp 0.5s ease-out}
+    @keyframes rankUp{0%{transform:translateY(20px);opacity:0}100%{transform:translateY(0);opacity:1}}
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="font-bold text-xl gradient-text">Céline.dev</a>
+      <div class="flex items-center gap-4">
+        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded-full font-medium">MODULE E-COMMERCE</span>
+        <a href="../index.html" class="text-gray-400 hover:text-white text-sm">← Retour</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="gradient-text">SEO Intelligence</span> IA
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto mb-6">
+          Optimisez votre référencement avec l'IA : analyse, suggestions et génération de contenu SEO
+        </p>
+        <div class="flex justify-center gap-4">
+          <button id="btn-auto" onclick="startAutoDemo()" class="gradient-bg px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:scale-105 transition">
+            ▶️ Lancer la démo automatique
+          </button>
+          <button id="btn-reset" onclick="location.reload()" class="px-6 py-3 rounded-xl font-semibold border border-gray-700 hover:border-purple-500 transition hidden">
+            🔄 Recommencer
+          </button>
+        </div>
+      </div>
+
+      <div id="narrator" class="narrator-box rounded-xl p-4 mb-6 hidden">
+        <p id="narrator-text" class="text-sm text-center"></p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        
+        <!-- Left: URL Analysis -->
+        <div class="lg:col-span-2 space-y-6">
+          
+          <!-- URL Input -->
+          <div id="url-section" class="card-glass rounded-2xl p-6">
+            <h3 class="font-bold mb-4 flex items-center gap-2">🔍 Analyse SEO de votre page</h3>
+            <div class="flex gap-3">
+              <input type="text" id="url-input" value="https://ma-boutique.com/sneakers-urban" class="flex-1 bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-sm" readonly>
+              <button id="btn-analyze" class="gradient-bg px-6 py-3 rounded-xl font-semibold text-sm">Analyser</button>
+            </div>
+          </div>
+          
+          <!-- AI Processing -->
+          <div id="ai-processing" class="card-glass rounded-2xl p-6 hidden">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center ai-thinking">
+                <span class="text-2xl">🤖</span>
+              </div>
+              <div class="flex-1">
+                <p id="ai-status" class="font-bold">Analyse en cours...</p>
+                <p id="ai-task" class="text-gray-400 text-sm">Connexion à l'IA...</p>
+              </div>
+            </div>
+            <div class="mt-4 h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div id="ai-progress" class="h-full gradient-bg progress-bar" style="width:0%"></div>
+            </div>
+          </div>
+          
+          <!-- SEO Score -->
+          <div id="score-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">📊 Score SEO Global</h3>
+            <div class="flex items-center gap-8">
+              <div class="relative">
+                <svg class="w-32 h-32 transform -rotate-90">
+                  <circle cx="64" cy="64" r="56" stroke="#1f2937" stroke-width="8" fill="none"/>
+                  <circle id="score-circle" cx="64" cy="64" r="56" stroke="url(#gradient)" stroke-width="8" fill="none" stroke-dasharray="352" stroke-dashoffset="352" stroke-linecap="round" class="score-ring"/>
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#8b5cf6"/>
+                      <stop offset="100%" stop-color="#06b6d4"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span id="score-value" class="text-3xl font-bold">0</span>
+                </div>
+              </div>
+              <div class="flex-1 space-y-2">
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Contenu</span>
+                    <span id="score-content">0%</span>
+                  </div>
+                  <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div id="bar-content" class="h-full bg-green-500 progress-bar" style="width:0%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Technique</span>
+                    <span id="score-tech">0%</span>
+                  </div>
+                  <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div id="bar-tech" class="h-full bg-purple-500 progress-bar" style="width:0%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>Mots-clés</span>
+                    <span id="score-keywords">0%</span>
+                  </div>
+                  <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div id="bar-keywords" class="h-full bg-cyan-500 progress-bar" style="width:0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Keywords Suggestions -->
+          <div id="keywords-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">🎯 Mots-clés suggérés par l'IA</h3>
+            <div id="keywords-list" class="flex flex-wrap gap-2 mb-4">
+            </div>
+            <div class="grid grid-cols-3 gap-3 text-center text-sm">
+              <div class="bg-green-500/10 rounded-lg p-2 border border-green-500/30">
+                <p class="text-green-400 font-bold" id="kw-volume">0</p>
+                <p class="text-gray-500 text-xs">Volume/mois</p>
+              </div>
+              <div class="bg-purple-500/10 rounded-lg p-2 border border-purple-500/30">
+                <p class="text-purple-400 font-bold" id="kw-difficulty">0%</p>
+                <p class="text-gray-500 text-xs">Difficulté</p>
+              </div>
+              <div class="bg-cyan-500/10 rounded-lg p-2 border border-cyan-500/30">
+                <p class="text-cyan-400 font-bold" id="kw-opportunity">0</p>
+                <p class="text-gray-500 text-xs">Opportunités</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- AI Content Generation -->
+          <div id="content-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">✍️ Contenu généré par l'IA</h3>
+            
+            <div class="space-y-4">
+              <div id="meta-title" class="bg-gray-800/50 rounded-xl p-4 hidden">
+                <p class="text-xs text-purple-400 mb-1">META TITLE (60 car.)</p>
+                <p id="meta-title-text" class="font-medium"></p>
+              </div>
+              
+              <div id="meta-desc" class="bg-gray-800/50 rounded-xl p-4 hidden">
+                <p class="text-xs text-cyan-400 mb-1">META DESCRIPTION (155 car.)</p>
+                <p id="meta-desc-text" class="text-sm text-gray-300"></p>
+              </div>
+              
+              <div id="h1-suggestion" class="bg-gray-800/50 rounded-xl p-4 hidden">
+                <p class="text-xs text-green-400 mb-1">H1 OPTIMISÉ</p>
+                <p id="h1-text" class="font-bold text-lg"></p>
+              </div>
+              
+              <div id="content-suggestions" class="bg-gray-800/50 rounded-xl p-4 hidden">
+                <p class="text-xs text-amber-400 mb-2">STRUCTURE CONTENU SUGGÉRÉE</p>
+                <ul id="content-list" class="text-sm space-y-1 text-gray-300">
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right: Stats & Actions -->
+        <div class="space-y-6">
+          
+          <!-- Issues Found -->
+          <div id="issues-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">⚠️ Problèmes détectés</h3>
+            <div id="issues-list" class="space-y-2">
+            </div>
+          </div>
+          
+          <!-- Ranking Preview -->
+          <div id="ranking-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">📈 Prévision de ranking</h3>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <span class="text-gray-500 text-sm">Actuel:</span>
+                <span id="rank-current" class="font-bold text-red-400">Position 47</span>
+              </div>
+              <div class="text-center py-2">
+                <span class="text-2xl">⬇️</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-gray-500 text-sm">Prévu:</span>
+                <span id="rank-future" class="font-bold text-green-400">Position 8</span>
+              </div>
+              <div class="bg-green-500/10 rounded-lg p-3 border border-green-500/30 text-center">
+                <p class="text-green-400 font-bold">+39 positions</p>
+                <p class="text-xs text-gray-500">en 3-6 mois</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- ROI Section -->
+          <div id="roi-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">💰 Impact estimé</h3>
+            <div class="space-y-3">
+              <div class="bg-green-500/10 rounded-xl p-3 text-center border border-green-500/30">
+                <p class="text-2xl font-bold text-green-400">+<span id="stat-traffic">0</span>%</p>
+                <p class="text-gray-400 text-xs">Trafic organique</p>
+              </div>
+              <div class="bg-purple-500/10 rounded-xl p-3 text-center border border-purple-500/30">
+                <p class="text-2xl font-bold text-purple-400">-<span id="stat-ads">0</span>€</p>
+                <p class="text-gray-400 text-xs">Budget Ads économisé</p>
+              </div>
+              <div class="bg-amber-500/10 rounded-xl p-3 text-center border border-amber-500/30">
+                <p class="text-2xl font-bold text-amber-400">+<span id="stat-revenue">0</span>€</p>
+                <p class="text-gray-400 text-xs">CA additionnel / mois</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- CTA -->
+          <div id="final-cta" class="card-glass rounded-2xl p-6 text-center hidden">
+            <p class="font-bold mb-2">🚀 Boostez votre SEO !</p>
+            <a href="../contact.html" class="gradient-bg px-6 py-3 rounded-xl font-bold inline-block hover:scale-105 transition pulse-glow text-sm">
+              💬 Demander un devis
+            </a>
+          </div>
+          
+        </div>
+      </div>
+
+      <div id="features" class="grid md:grid-cols-4 gap-4 mt-12 hidden">
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">🤖</div><p class="font-bold text-sm">IA GPT-4</p><p class="text-gray-500 text-xs">Analyse avancée</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">✍️</div><p class="font-bold text-sm">Génération</p><p class="text-gray-500 text-xs">Contenu optimisé</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">🎯</div><p class="font-bold text-sm">Mots-clés</p><p class="text-gray-500 text-xs">Suggestions IA</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">📊</div><p class="font-bold text-sm">Tracking</p><p class="text-gray-500 text-xs">Positions live</p></div>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="py-8 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">© 2024 Céline Harbane | <a href="../contact.html" class="text-purple-400">Contact</a></div>
+  </footer>
+
+  <script>
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  
+  function narrate(txt) {
+    document.getElementById('narrator').classList.remove('hidden');
+    document.getElementById('narrator-text').textContent = txt;
+  }
+  
+  function animateCount(id, target) {
+    let current = 0;
+    const el = document.getElementById(id);
+    const step = target / 40;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString();
+    }, 40);
+  }
+  
+  function setProgress(id, value) {
+    document.getElementById(id).style.width = value + '%';
+  }
+  
+  function addKeyword(text, volume, difficulty) {
+    const list = document.getElementById('keywords-list');
+    const tag = document.createElement('span');
+    const color = difficulty < 30 ? 'green' : difficulty < 60 ? 'amber' : 'red';
+    tag.className = `px-3 py-1 bg-${color}-500/20 text-${color}-400 rounded-full text-sm keyword-tag`;
+    tag.textContent = text;
+    list.appendChild(tag);
+  }
+  
+  function addIssue(type, text) {
+    const list = document.getElementById('issues-list');
+    const colors = { error: 'red', warning: 'amber', info: 'blue' };
+    const icons = { error: '❌', warning: '⚠️', info: 'ℹ️' };
+    const div = document.createElement('div');
+    div.className = `p-2 rounded-lg bg-${colors[type]}-500/10 border border-${colors[type]}-500/30 text-sm fade-in`;
+    div.innerHTML = `<span class="mr-2">${icons[type]}</span>${text}`;
+    list.appendChild(div);
+  }
+  
+  function typeText(elementId, text, speed = 30) {
+    return new Promise(resolve => {
+      const el = document.getElementById(elementId);
+      el.parentElement.classList.remove('hidden');
+      let i = 0;
+      const timer = setInterval(() => {
+        el.textContent = text.substring(0, i);
+        i++;
+        if (i > text.length) {
+          clearInterval(timer);
+          resolve();
+        }
+      }, speed);
+    });
+  }
+  
+  async function startAutoDemo() {
+    document.getElementById('btn-auto').classList.add('hidden');
+    document.getElementById('btn-reset').classList.remove('hidden');
+    
+    narrate("🔍 L'IA analyse votre page produit pour identifier les opportunités SEO...");
+    
+    // Show AI processing
+    document.getElementById('ai-processing').classList.remove('hidden');
+    document.getElementById('ai-processing').classList.add('fade-in');
+    
+    // Simulate AI analysis steps
+    const tasks = [
+      { task: "Extraction du contenu...", progress: 20 },
+      { task: "Analyse des mots-clés...", progress: 40 },
+      { task: "Vérification technique...", progress: 60 },
+      { task: "Analyse concurrentielle...", progress: 80 },
+      { task: "Génération des recommandations...", progress: 100 }
+    ];
+    
+    for (const step of tasks) {
+      document.getElementById('ai-task').textContent = step.task;
+      document.getElementById('ai-progress').style.width = step.progress + '%';
+      await sleep(800);
+    }
+    
+    document.getElementById('ai-status').textContent = "Analyse terminée !";
+    document.getElementById('ai-processing').querySelector('.ai-thinking').classList.remove('ai-thinking');
+    
+    await sleep(1000);
+    
+    // Show Score
+    narrate("📊 Score SEO calculé : votre page a un potentiel d'amélioration important...");
+    document.getElementById('score-section').classList.remove('hidden');
+    document.getElementById('score-section').classList.add('fade-in');
+    
+    await sleep(500);
+    
+    // Animate score
+    let score = 0;
+    const scoreTimer = setInterval(() => {
+      score += 2;
+      if (score > 58) { score = 58; clearInterval(scoreTimer); }
+      document.getElementById('score-value').textContent = score;
+      document.getElementById('score-circle').style.strokeDashoffset = 352 - (352 * score / 100);
+    }, 30);
+    
+    await sleep(800);
+    setProgress('bar-content', 45);
+    document.getElementById('score-content').textContent = '45%';
+    await sleep(400);
+    setProgress('bar-tech', 72);
+    document.getElementById('score-tech').textContent = '72%';
+    await sleep(400);
+    setProgress('bar-keywords', 38);
+    document.getElementById('score-keywords').textContent = '38%';
+    
+    await sleep(1500);
+    
+    // Show Issues
+    narrate("⚠️ Problèmes identifiés qui impactent votre référencement...");
+    document.getElementById('issues-section').classList.remove('hidden');
+    document.getElementById('issues-section').classList.add('fade-in');
+    
+    await sleep(500);
+    addIssue('error', 'Meta description manquante');
+    await sleep(400);
+    addIssue('error', 'H1 non optimisé pour le mot-clé');
+    await sleep(400);
+    addIssue('warning', 'Densité mot-clé trop faible (0.8%)');
+    await sleep(400);
+    addIssue('warning', 'Images sans attribut ALT');
+    await sleep(400);
+    addIssue('info', 'Contenu trop court (320 mots)');
+    
+    await sleep(2000);
+    
+    // Show Keywords
+    narrate("🎯 L'IA suggère des mots-clés à fort potentiel pour votre niche...");
+    document.getElementById('keywords-section').classList.remove('hidden');
+    document.getElementById('keywords-section').classList.add('fade-in');
+    
+    await sleep(500);
+    const keywords = [
+      { text: 'sneakers homme tendance', vol: 2400, diff: 25 },
+      { text: 'basket urbaine 2024', vol: 1800, diff: 18 },
+      { text: 'chaussures streetwear', vol: 3200, diff: 42 },
+      { text: 'sneakers confortables', vol: 1200, diff: 22 },
+      { text: 'baskets ville homme', vol: 890, diff: 15 }
+    ];
+    
+    for (const kw of keywords) {
+      addKeyword(kw.text, kw.vol, kw.diff);
+      await sleep(300);
+    }
+    
+    animateCount('kw-volume', 9490);
+    animateCount('kw-difficulty', 24);
+    animateCount('kw-opportunity', 12);
+    
+    await sleep(2000);
+    
+    // Show AI Content Generation
+    narrate("✍️ L'IA génère du contenu SEO optimisé automatiquement...");
+    document.getElementById('content-section').classList.remove('hidden');
+    document.getElementById('content-section').classList.add('fade-in');
+    
+    await sleep(500);
+    await typeText('meta-title-text', 'Sneakers Urban Elite Homme | Basket Tendance 2024 | Ma Boutique', 25);
+    await sleep(500);
+    await typeText('meta-desc-text', 'Découvrez nos sneakers Urban Elite pour homme. Baskets urbaines tendance 2024, confort optimal et style streetwear. Livraison gratuite dès 50€. ⭐ 4.8/5', 15);
+    await sleep(500);
+    await typeText('h1-text', 'Sneakers Urban Elite Homme - La Basket Urbaine Tendance 2024', 25);
+    
+    await sleep(500);
+    document.getElementById('content-suggestions').classList.remove('hidden');
+    const structure = [
+      '• H2: Pourquoi choisir les Sneakers Urban Elite ?',
+      '• H2: Caractéristiques et confort',
+      '• H2: Guide des tailles',
+      '• H2: Avis clients vérifiés',
+      '• H2: FAQ - Questions fréquentes'
+    ];
+    const contentList = document.getElementById('content-list');
+    for (const item of structure) {
+      const li = document.createElement('li');
+      li.textContent = item;
+      li.className = 'fade-in';
+      contentList.appendChild(li);
+      await sleep(300);
+    }
+    
+    await sleep(2000);
+    
+    // Show Ranking Preview
+    narrate("📈 Prévision d'amélioration : +39 positions en 3-6 mois !");
+    document.getElementById('ranking-section').classList.remove('hidden');
+    document.getElementById('ranking-section').classList.add('fade-in');
+    
+    await sleep(2000);
+    
+    // Show ROI
+    narrate("💰 Impact business : +156% de trafic organique et +8 200€/mois de CA !");
+    document.getElementById('roi-section').classList.remove('hidden');
+    document.getElementById('roi-section').classList.add('fade-in');
+    
+    await sleep(500);
+    animateCount('stat-traffic', 156);
+    animateCount('stat-ads', 2400);
+    animateCount('stat-revenue', 8200);
+    
+    await sleep(2500);
+    document.getElementById('features').classList.remove('hidden');
+    
+    await sleep(1000);
+    narrate("🚀 Ce module SEO IA peut générer +8 200€/mois en trafic organique. Contactez-moi !");
+    document.getElementById('final-cta').classList.remove('hidden');
+    document.getElementById('final-cta').classList.add('scale-in');
+  }
+  </script>
+
+</body>
+</html>

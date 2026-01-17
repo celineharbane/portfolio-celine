@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programme Fidélité | Céline Harbane</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{background:#0a0a0f;font-family:system-ui,sans-serif}
+    .gradient-text{background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gradient-bg{background:linear-gradient(135deg,#8b5cf6,#06b6d4)}
+    .card-glass{background:rgba(18,18,26,0.8);border:1px solid rgba(255,255,255,0.1)}
+    .nav-glass{background:rgba(18,18,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1)}
+    .fade-in{animation:fadeIn 0.5s ease-out forwards}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .scale-in{animation:scaleIn 0.4s ease-out forwards}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+    .pulse-glow{animation:pulseGlow 2s infinite}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(139,92,246,0.3)}50%{box-shadow:0 0 40px rgba(139,92,246,0.6)}}
+    .gold-glow{box-shadow:0 0 30px rgba(251,191,36,0.3)}
+    .narrator-box{background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(6,182,212,0.2));border:1px solid rgba(139,92,246,0.3)}
+    .points-pop{animation:pointsPop 0.5s ease-out}
+    @keyframes pointsPop{0%{transform:scale(1)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+    .level-up{animation:levelUp 1s ease-out}
+    @keyframes levelUp{0%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(10deg)}100%{transform:scale(1) rotate(0)}}
+    .confetti{position:fixed;font-size:24px;animation:confettiFall 3s ease-out forwards;pointer-events:none;z-index:100}
+    @keyframes confettiFall{0%{opacity:1;transform:translateY(-100px) rotate(0)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+    .progress-animate{transition:width 1.5s ease-out}
+    .bounce{animation:bounce 0.5s ease}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="font-bold text-xl gradient-text">Céline.dev</a>
+      <div class="flex items-center gap-4">
+        <span class="px-3 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full font-medium">MODULE E-COMMERCE</span>
+        <a href="../index.html" class="text-gray-400 hover:text-white text-sm">← Retour</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Programme <span class="gradient-text">Fidélité</span> & Points
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto mb-6">
+          Fidélisez vos clients et augmentez la récurrence d'achat de 67%
+        </p>
+        <div class="flex justify-center gap-4">
+          <button id="btn-auto" onclick="startAutoDemo()" class="gradient-bg px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:scale-105 transition">
+            ▶️ Lancer la démo automatique
+          </button>
+          <button id="btn-reset" onclick="location.reload()" class="px-6 py-3 rounded-xl font-semibold border border-gray-700 hover:border-purple-500 transition hidden">
+            🔄 Recommencer
+          </button>
+        </div>
+      </div>
+
+      <div id="narrator" class="narrator-box rounded-xl p-4 mb-6 max-w-4xl mx-auto hidden">
+        <p id="narrator-text" class="text-sm text-center"></p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        
+        <div class="space-y-6">
+          
+          <!-- Member Card -->
+          <div id="member-card" class="card-glass rounded-3xl p-6 relative overflow-hidden">
+            <div class="flex items-center gap-4 mb-6">
+              <div id="level-badge" class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center text-3xl">🥉</div>
+              <div>
+                <p class="text-gray-400 text-sm">Bienvenue</p>
+                <h2 class="text-xl font-bold">Marie Dupont</h2>
+                <p id="level-name" class="text-gray-500 text-sm">Membre Bronze</p>
+              </div>
+              <div class="ml-auto text-right">
+                <p class="text-gray-400 text-sm">Vos points</p>
+                <p id="points-display" class="text-3xl font-bold gradient-text">0</p>
+              </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="mb-2">
+              <div class="flex justify-between text-xs text-gray-500 mb-1">
+                <span id="current-level">🥉 Bronze</span>
+                <span id="next-level">🥈 Silver à 500 pts</span>
+              </div>
+              <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-gradient-to-r from-amber-600 to-amber-400 progress-animate" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Levels -->
+          <div id="levels-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">🏆 Niveaux de fidélité</h3>
+            <div class="grid grid-cols-4 gap-2">
+              <div id="lvl-bronze" class="text-center p-3 rounded-xl bg-amber-900/20 border-2 border-amber-700">
+                <span class="text-2xl">🥉</span>
+                <p class="text-xs font-bold mt-1">Bronze</p>
+                <p class="text-[10px] text-gray-500">×1 pts</p>
+              </div>
+              <div id="lvl-silver" class="text-center p-3 rounded-xl bg-gray-800/50 border-2 border-gray-700 opacity-50">
+                <span class="text-2xl">🥈</span>
+                <p class="text-xs font-bold mt-1">Silver</p>
+                <p class="text-[10px] text-gray-500">×1.5 pts</p>
+              </div>
+              <div id="lvl-gold" class="text-center p-3 rounded-xl bg-gray-800/50 border-2 border-gray-700 opacity-50">
+                <span class="text-2xl">👑</span>
+                <p class="text-xs font-bold mt-1">Gold</p>
+                <p class="text-[10px] text-gray-500">×2 pts</p>
+              </div>
+              <div id="lvl-platinum" class="text-center p-3 rounded-xl bg-gray-800/50 border-2 border-gray-700 opacity-50">
+                <span class="text-2xl">💎</span>
+                <p class="text-xs font-bold mt-1">Platinum</p>
+                <p class="text-[10px] text-gray-500">×3 pts</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Activity -->
+          <div id="activity-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">📋 Activité récente</h3>
+            <div id="activity-list" class="space-y-2 max-h-[200px] overflow-hidden">
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="space-y-6">
+          
+          <!-- Rewards -->
+          <div id="rewards-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">🎁 Récompenses disponibles</h3>
+            <div class="space-y-2">
+              <div id="reward-1" class="flex items-center justify-between p-3 bg-gray-800/30 rounded-xl opacity-50">
+                <div class="flex items-center gap-3">
+                  <span class="text-xl">🏷️</span>
+                  <div>
+                    <p class="font-medium text-sm">-10% sur commande</p>
+                    <p class="text-xs text-gray-500">500 points</p>
+                  </div>
+                </div>
+                <span class="text-gray-600 text-xs">🔒</span>
+              </div>
+              <div id="reward-2" class="flex items-center justify-between p-3 bg-gray-800/30 rounded-xl opacity-50">
+                <div class="flex items-center gap-3">
+                  <span class="text-xl">🚚</span>
+                  <div>
+                    <p class="font-medium text-sm">Livraison gratuite</p>
+                    <p class="text-xs text-gray-500">300 points</p>
+                  </div>
+                </div>
+                <span class="text-gray-600 text-xs">🔒</span>
+              </div>
+              <div id="reward-3" class="flex items-center justify-between p-3 bg-gray-800/30 rounded-xl opacity-50">
+                <div class="flex items-center gap-3">
+                  <span class="text-xl">🎀</span>
+                  <div>
+                    <p class="font-medium text-sm">Cadeau surprise</p>
+                    <p class="text-xs text-gray-500">1000 points</p>
+                  </div>
+                </div>
+                <span class="text-gray-600 text-xs">🔒</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- ROI -->
+          <div id="roi-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">📊 Impact Business</h3>
+            <div class="space-y-3">
+              <div class="bg-green-500/10 rounded-xl p-3 text-center border border-green-500/30">
+                <p class="text-2xl font-bold text-green-400">+<span id="stat-retention">0</span>%</p>
+                <p class="text-gray-400 text-xs">Rétention client</p>
+              </div>
+              <div class="bg-purple-500/10 rounded-xl p-3 text-center border border-purple-500/30">
+                <p class="text-2xl font-bold text-purple-400">+<span id="stat-frequency">0</span>%</p>
+                <p class="text-gray-400 text-xs">Fréquence d'achat</p>
+              </div>
+              <div class="bg-amber-500/10 rounded-xl p-3 text-center border border-amber-500/30">
+                <p class="text-2xl font-bold text-amber-400">+<span id="stat-ltv">0</span>€</p>
+                <p class="text-gray-400 text-xs">LTV client / an</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- CTA -->
+          <div id="final-cta" class="card-glass rounded-2xl p-6 text-center hidden">
+            <p class="font-bold mb-2">🚀 Fidélisez vos clients !</p>
+            <a href="../contact.html" class="gradient-bg px-6 py-3 rounded-xl font-bold inline-block hover:scale-105 transition pulse-glow text-sm">
+              💬 Demander un devis
+            </a>
+          </div>
+          
+        </div>
+      </div>
+
+      <div id="features" class="grid md:grid-cols-4 gap-4 mt-12 hidden">
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">🎯</div><p class="font-bold text-sm">Points auto</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">👑</div><p class="font-bold text-sm">Niveaux VIP</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">🎁</div><p class="font-bold text-sm">Récompenses</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">👥</div><p class="font-bold text-sm">Parrainage</p></div>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="py-8 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">© 2024 Céline Harbane | <a href="../contact.html" class="text-purple-400">Contact</a></div>
+  </footer>
+
+  <script>
+  let points = 0;
+  
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  
+  function narrate(txt) {
+    document.getElementById('narrator').classList.remove('hidden');
+    document.getElementById('narrator-text').textContent = txt;
+  }
+  
+  function updatePoints(newPoints, animate = true) {
+    points = newPoints;
+    const el = document.getElementById('points-display');
+    el.textContent = points;
+    if (animate) el.classList.add('points-pop');
+    setTimeout(() => el.classList.remove('points-pop'), 500);
+    
+    // Update progress
+    let progress = 0;
+    if (points < 500) progress = (points / 500) * 100;
+    else if (points < 1500) progress = (points / 1500) * 100;
+    else progress = Math.min((points / 3000) * 100, 100);
+    document.getElementById('progress-bar').style.width = progress + '%';
+  }
+  
+  function addActivity(emoji, text, pts) {
+    const list = document.getElementById('activity-list');
+    const div = document.createElement('div');
+    div.className = 'flex items-center justify-between p-2 bg-gray-800/30 rounded-lg fade-in';
+    div.innerHTML = `
+      <div class="flex items-center gap-2">
+        <span>${emoji}</span>
+        <span class="text-sm">${text}</span>
+      </div>
+      <span class="text-green-400 font-bold text-sm">+${pts} pts</span>
+    `;
+    list.insertBefore(div, list.firstChild);
+  }
+  
+  function unlockReward(id) {
+    const el = document.getElementById(id);
+    el.classList.remove('opacity-50');
+    el.classList.add('bounce');
+    el.querySelector('span:last-child').textContent = '✓';
+    el.querySelector('span:last-child').classList.add('text-green-400');
+  }
+  
+  function levelUp(badge, name, color) {
+    const badgeEl = document.getElementById('level-badge');
+    badgeEl.textContent = badge;
+    badgeEl.classList.add('level-up');
+    document.getElementById('level-name').textContent = name;
+    document.getElementById('member-card').classList.add(color);
+    
+    // Confetti
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        const conf = document.createElement('span');
+        conf.className = 'confetti';
+        conf.textContent = ['🎉', '⭐', '✨', '🎊'][Math.floor(Math.random() * 4)];
+        conf.style.left = Math.random() * 100 + 'vw';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 3000);
+      }, i * 50);
+    }
+  }
+  
+  function animateCount(id, target) {
+    let current = 0;
+    const el = document.getElementById(id);
+    const step = target / 50;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString();
+    }, 30);
+  }
+  
+  async function startAutoDemo() {
+    document.getElementById('btn-auto').classList.add('hidden');
+    document.getElementById('btn-reset').classList.remove('hidden');
+    
+    narrate("👤 Marie vient de s'inscrire au programme fidélité de votre boutique...");
+    await sleep(2000);
+    
+    document.getElementById('levels-section').classList.remove('hidden');
+    document.getElementById('levels-section').classList.add('fade-in');
+    
+    await sleep(1500);
+    narrate("🛒 Elle passe sa première commande de 89€ et gagne des points automatiquement...");
+    document.getElementById('activity-section').classList.remove('hidden');
+    document.getElementById('activity-section').classList.add('fade-in');
+    
+    await sleep(1500);
+    addActivity('🛒', 'Commande #1234', 89);
+    updatePoints(89);
+    
+    await sleep(2000);
+    narrate("👥 Marie parraine une amie → Bonus de 200 points !");
+    addActivity('👥', 'Parrainage Julie', 200);
+    updatePoints(289);
+    
+    await sleep(2000);
+    narrate("🎁 Les récompenses se débloquent progressivement...");
+    document.getElementById('rewards-section').classList.remove('hidden');
+    document.getElementById('rewards-section').classList.add('fade-in');
+    unlockReward('reward-2');
+    
+    await sleep(2000);
+    narrate("🛒 Nouvelle commande ! Marie cumule les points...");
+    addActivity('🛒', 'Commande #1567', 156);
+    updatePoints(445);
+    
+    await sleep(2000);
+    narrate("⭐ Elle atteint 500 points → Passage niveau SILVER !");
+    addActivity('⭐', 'Bonus fidélité', 55);
+    updatePoints(500);
+    levelUp('🥈', 'Membre Silver', 'gold-glow');
+    document.getElementById('lvl-silver').classList.remove('opacity-50');
+    document.getElementById('lvl-silver').classList.add('border-gray-400');
+    document.getElementById('next-level').textContent = '👑 Gold à 1500 pts';
+    unlockReward('reward-1');
+    
+    await sleep(3000);
+    narrate("📈 Résultat : Marie revient plus souvent et dépense plus !");
+    
+    document.getElementById('roi-section').classList.remove('hidden');
+    document.getElementById('roi-section').classList.add('fade-in');
+    
+    await sleep(500);
+    animateCount('stat-retention', 67);
+    animateCount('stat-frequency', 45);
+    animateCount('stat-ltv', 320);
+    
+    await sleep(2500);
+    document.getElementById('features').classList.remove('hidden');
+    
+    await sleep(1000);
+    narrate("🚀 Un programme fidélité augmente la LTV de +320€/client/an. Contactez-moi !");
+    document.getElementById('final-cta').classList.remove('hidden');
+    document.getElementById('final-cta').classList.add('scale-in');
+  }
+  </script>
+
+</body>
+</html>
