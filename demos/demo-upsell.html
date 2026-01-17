@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upsell & Cross-sell Pro | Céline Harbane</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{background:#0a0a0f;font-family:system-ui,sans-serif}
+    .gradient-text{background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gradient-bg{background:linear-gradient(135deg,#8b5cf6,#06b6d4)}
+    .card-glass{background:rgba(18,18,26,0.8);border:1px solid rgba(255,255,255,0.1)}
+    .nav-glass{background:rgba(18,18,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1)}
+    .fade-in{animation:fadeIn 0.5s ease-out forwards}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .slide-up{animation:slideUp 0.4s ease-out forwards}
+    @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .scale-in{animation:scaleIn 0.4s ease-out forwards}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+    .pulse-glow{animation:pulseGlow 2s infinite}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(139,92,246,0.3)}50%{box-shadow:0 0 40px rgba(139,92,246,0.6)}}
+    .float{animation:float 3s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .highlight{animation:highlight 0.8s ease-out}
+    @keyframes highlight{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.7)}100%{box-shadow:0 0 0 15px rgba(34,197,94,0)}}
+    .narrator-box{background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(6,182,212,0.2));border:1px solid rgba(139,92,246,0.3)}
+    .cart-item.added{border-color:#22c55e;background:rgba(34,197,94,0.1)}
+    .money-pop{position:absolute;animation:moneyPop 1s ease-out forwards;font-size:24px;pointer-events:none}
+    @keyframes moneyPop{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(1.5)}}
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="font-bold text-xl gradient-text">Céline.dev</a>
+      <div class="flex items-center gap-4">
+        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full font-medium">MODULE E-COMMERCE</span>
+        <a href="../index.html" class="text-gray-400 hover:text-white text-sm">← Retour</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="gradient-text">Upsell & Cross-sell</span> Pro
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto mb-6">
+          Augmentez votre panier moyen de 35% avec des suggestions intelligentes
+        </p>
+        <div class="flex justify-center gap-4">
+          <button id="btn-auto" onclick="startAutoDemo()" class="gradient-bg px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:scale-105 transition">
+            ▶️ Lancer la démo automatique
+          </button>
+          <button id="btn-reset" onclick="location.reload()" class="px-6 py-3 rounded-xl font-semibold border border-gray-700 hover:border-purple-500 transition hidden">
+            🔄 Recommencer
+          </button>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-8">
+        
+        <div class="lg:col-span-3 space-y-6">
+          
+          <div id="narrator" class="narrator-box rounded-xl p-4 hidden">
+            <p id="narrator-text" class="text-sm"></p>
+          </div>
+          
+          <div class="card-glass rounded-3xl p-6">
+            <div class="flex gap-6 items-center">
+              <div class="w-32 h-32 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center">
+                <span class="text-6xl float">👟</span>
+              </div>
+              <div class="flex-1">
+                <span class="text-purple-400 text-xs font-medium">BEST-SELLER</span>
+                <h2 class="text-xl font-bold mb-1">Sneakers Urban Elite</h2>
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-yellow-400 text-sm">★★★★★</span>
+                  <span class="text-gray-500 text-xs">(128 avis)</span>
+                </div>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-xl font-bold">149,00 €</span>
+                  <span class="text-gray-500 line-through text-sm">189€</span>
+                </div>
+                <button id="btn-add" class="gradient-bg px-4 py-2 rounded-lg font-semibold text-sm">🛒 Ajouter au panier</button>
+              </div>
+            </div>
+          </div>
+          
+          <div id="crosssell" class="card-glass rounded-3xl p-6 hidden">
+            <h3 class="font-bold mb-4 flex items-center gap-2">💡 Souvent achetés ensemble</h3>
+            <div class="grid grid-cols-4 gap-3">
+              <div class="bg-gray-800/50 rounded-xl p-3 text-center border-2 border-purple-500">
+                <span class="text-2xl">👟</span>
+                <p class="text-xs mt-1">Sneakers</p>
+                <p class="text-purple-400 font-bold text-sm">149€</p>
+                <span class="text-[10px] text-green-400">✓ Ajouté</span>
+              </div>
+              <div id="cs-1" class="cart-item bg-gray-800/50 rounded-xl p-3 text-center border-2 border-gray-700 transition-all">
+                <span class="text-2xl">🧦</span>
+                <p class="text-xs mt-1">Chaussettes</p>
+                <p class="text-sm"><span class="line-through text-gray-500">19€</span> <span class="text-green-400">14€</span></p>
+              </div>
+              <div id="cs-2" class="cart-item bg-gray-800/50 rounded-xl p-3 text-center border-2 border-gray-700 transition-all">
+                <span class="text-2xl">🧴</span>
+                <p class="text-xs mt-1">Spray</p>
+                <p class="text-sm"><span class="line-through text-gray-500">24€</span> <span class="text-green-400">18€</span></p>
+              </div>
+              <div id="cs-3" class="cart-item bg-gray-800/50 rounded-xl p-3 text-center border-2 border-gray-700 transition-all">
+                <span class="text-2xl">👜</span>
+                <p class="text-xs mt-1">Sac</p>
+                <p class="text-sm"><span class="line-through text-gray-500">39€</span> <span class="text-green-400">29€</span></p>
+              </div>
+            </div>
+            <div id="bundle-msg" class="mt-4 p-3 bg-green-500/10 rounded-xl border border-green-500/30 hidden">
+              <p class="text-green-400 font-semibold text-sm text-center">🎉 Bundle : Économisez 21€ → Total : <span id="bundle-total">181€</span></p>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="lg:col-span-2 space-y-6">
+          
+          <div class="card-glass rounded-2xl p-6">
+            <h3 class="font-bold mb-4">🛒 Panier</h3>
+            <div id="cart-list" class="space-y-2 mb-4 min-h-[100px]">
+              <p class="text-gray-500 text-sm text-center py-6">Panier vide</p>
+            </div>
+            <div class="border-t border-gray-800 pt-4 flex justify-between items-center">
+              <span class="text-gray-400">Total</span>
+              <span id="cart-total" class="text-2xl font-bold">0 €</span>
+            </div>
+          </div>
+          
+          <div id="popup-container" class="hidden">
+            <div class="card-glass rounded-2xl p-6 border-2 border-purple-500 relative overflow-hidden">
+              <div class="absolute top-0 left-0 right-0 gradient-bg text-center py-1 text-xs font-bold">🔥 OFFRE FLASH -25%</div>
+              <div class="mt-6 text-center mb-4">
+                <h3 class="font-bold">Attendez ! 🎁</h3>
+                <p class="text-gray-400 text-xs">Offre exclusive pour vous</p>
+              </div>
+              <div class="bg-gray-800/50 rounded-xl p-3 flex items-center gap-3 mb-4">
+                <span class="text-3xl">🧢</span>
+                <div class="flex-1">
+                  <p class="font-bold text-sm">Casquette Urban</p>
+                  <p><span class="line-through text-gray-500">39€</span> <span class="text-green-400 font-bold">29€</span></p>
+                </div>
+              </div>
+              <button id="btn-accept" class="w-full gradient-bg py-2 rounded-lg font-bold text-sm">✓ J'en profite !</button>
+            </div>
+          </div>
+          
+          <div id="roi-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4">📊 Impact Business</h3>
+            <div class="space-y-3">
+              <div class="bg-green-500/10 rounded-xl p-3 text-center border border-green-500/30">
+                <p class="text-2xl font-bold text-green-400">+<span id="stat-panier">0</span>%</p>
+                <p class="text-gray-400 text-xs">Panier moyen</p>
+              </div>
+              <div class="bg-purple-500/10 rounded-xl p-3 text-center border border-purple-500/30">
+                <p class="text-2xl font-bold text-purple-400"><span id="stat-taux">0</span>%</p>
+                <p class="text-gray-400 text-xs">Taux acceptation</p>
+              </div>
+              <div class="bg-amber-500/10 rounded-xl p-3 text-center border border-amber-500/30">
+                <p class="text-2xl font-bold text-amber-400">+<span id="stat-rev">0</span>€</p>
+                <p class="text-gray-400 text-xs">Revenus / mois</p>
+              </div>
+            </div>
+          </div>
+          
+          <div id="final-cta" class="card-glass rounded-2xl p-6 text-center hidden">
+            <p class="font-bold mb-2">🚀 Boostez vos ventes !</p>
+            <a href="../contact.html" class="gradient-bg px-6 py-3 rounded-xl font-bold inline-block hover:scale-105 transition pulse-glow text-sm">
+              💬 Demander un devis
+            </a>
+          </div>
+          
+        </div>
+      </div>
+
+      <div id="features" class="grid md:grid-cols-4 gap-4 mt-12 hidden">
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">🎯</div><p class="font-bold text-sm">IA Suggestion</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">⚡</div><p class="font-bold text-sm">Popup Smart</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">📊</div><p class="font-bold text-sm">A/B Testing</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">💰</div><p class="font-bold text-sm">+35% Panier</p></div>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="py-8 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">© 2024 Céline Harbane | <a href="../contact.html" class="text-purple-400">Contact</a></div>
+  </footer>
+
+  <script>
+  let cart = [];
+  let total = 0;
+  
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  
+  function narrate(txt) {
+    document.getElementById('narrator').classList.remove('hidden');
+    document.getElementById('narrator-text').textContent = txt;
+  }
+  
+  function addItem(emoji, name, price) {
+    cart.push({emoji, name, price});
+    total += price;
+    renderCart();
+  }
+  
+  function renderCart() {
+    const list = document.getElementById('cart-list');
+    list.innerHTML = cart.map(i => `
+      <div class="flex justify-between items-center p-2 bg-gray-800/30 rounded-lg fade-in">
+        <span class="text-sm">${i.emoji} ${i.name}</span>
+        <span class="font-bold text-sm">${i.price}€</span>
+      </div>
+    `).join('');
+    document.getElementById('cart-total').textContent = total + ' €';
+  }
+  
+  function animateCount(id, target) {
+    let current = 0;
+    const el = document.getElementById(id);
+    const step = target / 50;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString();
+    }, 30);
+  }
+  
+  async function startAutoDemo() {
+    document.getElementById('btn-auto').classList.add('hidden');
+    document.getElementById('btn-reset').classList.remove('hidden');
+    
+    narrate("👆 Un client ajoute les Sneakers Urban Elite à son panier...");
+    await sleep(2000);
+    
+    addItem('👟', 'Sneakers Urban Elite', 149);
+    
+    await sleep(1500);
+    narrate("💡 Le module affiche automatiquement les produits complémentaires avec des promos...");
+    document.getElementById('crosssell').classList.remove('hidden');
+    document.getElementById('crosssell').classList.add('fade-in');
+    
+    await sleep(2500);
+    narrate("🧦 Le client clique sur les chaussettes en promo → Ajouté au panier !");
+    document.getElementById('cs-1').classList.add('added', 'highlight');
+    addItem('🧦', 'Chaussettes Sport', 14);
+    
+    await sleep(2000);
+    narrate("🧴 Il ajoute aussi le spray protecteur...");
+    document.getElementById('cs-2').classList.add('added', 'highlight');
+    addItem('🧴', 'Spray Protecteur', 18);
+    
+    await sleep(2000);
+    document.getElementById('bundle-msg').classList.remove('hidden');
+    document.getElementById('bundle-total').textContent = total + '€';
+    
+    await sleep(2000);
+    narrate("🎁 Au checkout, un popup upsell apparaît avec une offre irrésistible...");
+    document.getElementById('popup-container').classList.remove('hidden');
+    document.getElementById('popup-container').classList.add('slide-up');
+    
+    await sleep(3000);
+    narrate("✅ Le client accepte ! +29€ de plus dans le panier !");
+    addItem('🧢', 'Casquette Urban', 29);
+    document.getElementById('popup-container').classList.add('hidden');
+    
+    await sleep(2000);
+    narrate("📈 Résultat : Panier passé de 149€ à " + total + "€ soit +41% !");
+    
+    document.getElementById('roi-section').classList.remove('hidden');
+    document.getElementById('roi-section').classList.add('fade-in');
+    
+    await sleep(500);
+    animateCount('stat-panier', 41);
+    animateCount('stat-taux', 28);
+    animateCount('stat-rev', 8450);
+    
+    await sleep(2500);
+    document.getElementById('features').classList.remove('hidden');
+    
+    await sleep(1000);
+    narrate("🚀 Ce module peut générer +8 450€/mois. Contactez-moi pour un devis !");
+    document.getElementById('final-cta').classList.remove('hidden');
+    document.getElementById('final-cta').classList.add('scale-in');
+  }
+  </script>
+
+</body>
+</html>

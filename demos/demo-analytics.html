@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Analytics | Céline Harbane</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body{background:#0a0a0f;font-family:system-ui,sans-serif}
+    .gradient-text{background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gradient-bg{background:linear-gradient(135deg,#8b5cf6,#06b6d4)}
+    .card-glass{background:rgba(18,18,26,0.8);border:1px solid rgba(255,255,255,0.1)}
+    .nav-glass{background:rgba(18,18,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1)}
+    .fade-in{animation:fadeIn 0.5s ease-out forwards}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .scale-in{animation:scaleIn 0.4s ease-out forwards}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+    .pulse-glow{animation:pulseGlow 2s infinite}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(139,92,246,0.3)}50%{box-shadow:0 0 40px rgba(139,92,246,0.6)}}
+    .narrator-box{background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(6,182,212,0.2));border:1px solid rgba(139,92,246,0.3)}
+    .stat-card{transition:all 0.3s}
+    .stat-card.highlight{transform:scale(1.05);border-color:rgba(139,92,246,0.5)}
+    .counter-animate{animation:counterPop 0.5s ease-out}
+    @keyframes counterPop{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+    .alert-pulse{animation:alertPulse 2s infinite}
+    @keyframes alertPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.8;transform:scale(1.02)}}
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="font-bold text-xl gradient-text">Céline.dev</a>
+      <div class="flex items-center gap-4">
+        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-medium">MODULE E-COMMERCE</span>
+        <a href="../index.html" class="text-gray-400 hover:text-white text-sm">← Retour</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 pb-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          Dashboard <span class="gradient-text">Analytics</span> Pro
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto mb-6">
+          Pilotez votre boutique avec des données en temps réel et prenez les bonnes décisions
+        </p>
+        <div class="flex justify-center gap-4">
+          <button id="btn-auto" onclick="startAutoDemo()" class="gradient-bg px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:scale-105 transition">
+            ▶️ Lancer la démo automatique
+          </button>
+          <button id="btn-reset" onclick="location.reload()" class="px-6 py-3 rounded-xl font-semibold border border-gray-700 hover:border-purple-500 transition hidden">
+            🔄 Recommencer
+          </button>
+        </div>
+      </div>
+
+      <div id="narrator" class="narrator-box rounded-xl p-4 mb-6 hidden">
+        <p id="narrator-text" class="text-sm text-center"></p>
+      </div>
+
+      <!-- KPI Cards -->
+      <div id="kpi-section" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden">
+        <div id="kpi-ca" class="stat-card card-glass rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-xs">Chiffre d'affaires</span>
+            <span class="text-lg">💰</span>
+          </div>
+          <p class="text-2xl font-bold"><span id="val-ca">0</span> €</p>
+          <p id="trend-ca" class="text-xs text-gray-500 mt-1"></p>
+        </div>
+        <div id="kpi-orders" class="stat-card card-glass rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-xs">Commandes</span>
+            <span class="text-lg">📦</span>
+          </div>
+          <p class="text-2xl font-bold"><span id="val-orders">0</span></p>
+          <p id="trend-orders" class="text-xs text-gray-500 mt-1"></p>
+        </div>
+        <div id="kpi-panier" class="stat-card card-glass rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-xs">Panier moyen</span>
+            <span class="text-lg">🛒</span>
+          </div>
+          <p class="text-2xl font-bold"><span id="val-panier">0</span> €</p>
+          <p id="trend-panier" class="text-xs text-gray-500 mt-1"></p>
+        </div>
+        <div id="kpi-conv" class="stat-card card-glass rounded-2xl p-4">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-gray-400 text-xs">Conversion</span>
+            <span class="text-lg">📈</span>
+          </div>
+          <p class="text-2xl font-bold"><span id="val-conv">0</span>%</p>
+          <p id="trend-conv" class="text-xs text-gray-500 mt-1"></p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        
+        <!-- Chart -->
+        <div id="chart-section" class="lg:col-span-2 card-glass rounded-2xl p-6 hidden">
+          <h3 class="font-bold mb-4">📊 Revenus - 7 derniers jours</h3>
+          <canvas id="revenueChart" height="180"></canvas>
+        </div>
+        
+        <!-- Alerts -->
+        <div id="alerts-section" class="card-glass rounded-2xl p-6 hidden">
+          <h3 class="font-bold mb-4">🔔 Alertes intelligentes</h3>
+          <div id="alerts-list" class="space-y-3">
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6 mt-6">
+        
+        <!-- Top Products -->
+        <div id="products-section" class="card-glass rounded-2xl p-6 hidden">
+          <h3 class="font-bold mb-4">🏆 Top Produits</h3>
+          <div id="products-list" class="space-y-2">
+          </div>
+        </div>
+        
+        <!-- Funnel -->
+        <div id="funnel-section" class="card-glass rounded-2xl p-6 hidden">
+          <h3 class="font-bold mb-4">🎯 Entonnoir conversion</h3>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3">
+              <div class="w-full bg-purple-500/20 rounded-lg h-8 flex items-center px-3">
+                <span class="text-sm">Visiteurs</span>
+                <span class="ml-auto font-bold" id="funnel-1">0</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-4/5 bg-purple-500/30 rounded-lg h-8 flex items-center px-3">
+                <span class="text-sm">Panier</span>
+                <span class="ml-auto font-bold" id="funnel-2">0</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-2/5 bg-purple-500/40 rounded-lg h-8 flex items-center px-3">
+                <span class="text-sm">Checkout</span>
+                <span class="ml-auto font-bold" id="funnel-3">0</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-1/4 gradient-bg rounded-lg h-8 flex items-center px-3">
+                <span class="text-sm">Achat</span>
+                <span class="ml-auto font-bold" id="funnel-4">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- ROI Section -->
+      <div id="roi-section" class="card-glass rounded-2xl p-6 mt-6 hidden">
+        <h3 class="font-bold mb-4 text-center">💡 Décisions basées sur les données = Plus de revenus</h3>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="bg-green-500/10 rounded-xl p-4 text-center border border-green-500/30">
+            <p class="text-3xl font-bold text-green-400">+<span id="stat-decisions">0</span>%</p>
+            <p class="text-gray-400 text-sm">Meilleures décisions</p>
+          </div>
+          <div class="bg-purple-500/10 rounded-xl p-4 text-center border border-purple-500/30">
+            <p class="text-3xl font-bold text-purple-400">-<span id="stat-time">0</span>h</p>
+            <p class="text-gray-400 text-sm">Temps d'analyse / sem</p>
+          </div>
+          <div class="bg-amber-500/10 rounded-xl p-4 text-center border border-amber-500/30">
+            <p class="text-3xl font-bold text-amber-400">+<span id="stat-revenue">0</span>€</p>
+            <p class="text-gray-400 text-sm">Revenus optimisés / mois</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div id="final-cta" class="card-glass rounded-2xl p-6 text-center mt-6 hidden">
+        <p class="font-bold mb-2">🚀 Prenez le contrôle de vos données !</p>
+        <a href="../contact.html" class="gradient-bg px-6 py-3 rounded-xl font-bold inline-block hover:scale-105 transition pulse-glow text-sm">
+          💬 Demander un devis
+        </a>
+      </div>
+
+      <div id="features" class="grid md:grid-cols-4 gap-4 mt-12 hidden">
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">📊</div><p class="font-bold text-sm">Temps réel</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">🔔</div><p class="font-bold text-sm">Alertes smart</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">📱</div><p class="font-bold text-sm">Mobile</p></div>
+        <div class="card-glass rounded-xl p-4 text-center scale-in"><div class="text-2xl mb-2">📤</div><p class="font-bold text-sm">Export PDF</p></div>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer class="py-8 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">© 2024 Céline Harbane | <a href="../contact.html" class="text-purple-400">Contact</a></div>
+  </footer>
+
+  <script>
+  let chart;
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  
+  function narrate(txt) {
+    document.getElementById('narrator').classList.remove('hidden');
+    document.getElementById('narrator-text').textContent = txt;
+  }
+  
+  function animateCount(id, target, suffix = '') {
+    let current = 0;
+    const el = document.getElementById(id);
+    const step = target / 40;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = Math.floor(current).toLocaleString() + suffix;
+    }, 40);
+  }
+  
+  function highlightCard(id) {
+    document.getElementById(id).classList.add('highlight');
+    setTimeout(() => document.getElementById(id).classList.remove('highlight'), 2000);
+  }
+  
+  function addAlert(emoji, text, type) {
+    const list = document.getElementById('alerts-list');
+    const colors = { success: 'green', warning: 'amber', info: 'purple' };
+    const div = document.createElement('div');
+    div.className = `p-3 rounded-xl bg-${colors[type]}-500/10 border border-${colors[type]}-500/30 fade-in`;
+    div.innerHTML = `<p class="text-sm"><span class="mr-2">${emoji}</span>${text}</p>`;
+    list.appendChild(div);
+  }
+  
+  function addProduct(rank, emoji, name, sales, trend) {
+    const list = document.getElementById('products-list');
+    const div = document.createElement('div');
+    div.className = 'flex items-center gap-3 p-2 bg-gray-800/30 rounded-lg fade-in';
+    div.innerHTML = `
+      <span class="text-gray-500 font-bold">#${rank}</span>
+      <span class="text-xl">${emoji}</span>
+      <span class="flex-1 text-sm">${name}</span>
+      <span class="font-bold text-sm">${sales}</span>
+      <span class="text-${trend > 0 ? 'green' : 'red'}-400 text-xs">${trend > 0 ? '↑' : '↓'}${Math.abs(trend)}%</span>
+    `;
+    list.appendChild(div);
+  }
+  
+  async function startAutoDemo() {
+    document.getElementById('btn-auto').classList.add('hidden');
+    document.getElementById('btn-reset').classList.remove('hidden');
+    
+    narrate("📊 Votre dashboard se met à jour en temps réel avec les données de votre boutique...");
+    
+    document.getElementById('kpi-section').classList.remove('hidden');
+    document.getElementById('kpi-section').classList.add('fade-in');
+    
+    await sleep(1500);
+    
+    // Animate KPIs
+    narrate("💰 Les KPIs clés s'affichent instantanément...");
+    animateCount('val-ca', 48520);
+    highlightCard('kpi-ca');
+    document.getElementById('trend-ca').innerHTML = '<span class="text-green-400">↑ +12.5%</span> vs mois dernier';
+    
+    await sleep(1000);
+    animateCount('val-orders', 384);
+    highlightCard('kpi-orders');
+    document.getElementById('trend-orders').innerHTML = '<span class="text-green-400">↑ +8.3%</span>';
+    
+    await sleep(1000);
+    animateCount('val-panier', 126);
+    highlightCard('kpi-panier');
+    document.getElementById('trend-panier').innerHTML = '<span class="text-green-400">↑ +4.2%</span>';
+    
+    await sleep(1000);
+    animateCount('val-conv', 3.8, '');
+    highlightCard('kpi-conv');
+    document.getElementById('trend-conv').innerHTML = '<span class="text-red-400">↓ -0.2%</span>';
+    
+    await sleep(2000);
+    
+    // Chart
+    narrate("📈 Les graphiques montrent l'évolution de vos ventes...");
+    document.getElementById('chart-section').classList.remove('hidden');
+    document.getElementById('chart-section').classList.add('fade-in');
+    
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+        datasets: [{
+          label: 'Revenus',
+          data: [4200, 5100, 4800, 6200, 7100, 8900, 7500],
+          borderColor: '#8b5cf6',
+          backgroundColor: 'rgba(139,92,246,0.1)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+    
+    await sleep(2000);
+    
+    // Alerts
+    narrate("🔔 Les alertes intelligentes vous préviennent des opportunités...");
+    document.getElementById('alerts-section').classList.remove('hidden');
+    document.getElementById('alerts-section').classList.add('fade-in');
+    
+    await sleep(800);
+    addAlert('📈', 'Pic de ventes détecté sur les sneakers !', 'success');
+    await sleep(800);
+    addAlert('⚠️', 'Stock faible : T-Shirt Blanc (12 restants)', 'warning');
+    await sleep(800);
+    addAlert('💡', 'Suggestion : Relancer les abandons panier', 'info');
+    
+    await sleep(2000);
+    
+    // Products & Funnel
+    narrate("🏆 Identifiez vos best-sellers et optimisez votre entonnoir...");
+    document.getElementById('products-section').classList.remove('hidden');
+    document.getElementById('funnel-section').classList.remove('hidden');
+    
+    await sleep(500);
+    addProduct(1, '👟', 'Sneakers Urban', '89 ventes', 12);
+    await sleep(300);
+    addProduct(2, '👕', 'T-Shirt Classic', '76 ventes', 8);
+    await sleep(300);
+    addProduct(3, '🧢', 'Casquette Logo', '64 ventes', -3);
+    
+    animateCount('funnel-1', 12450);
+    await sleep(300);
+    animateCount('funnel-2', 2890);
+    await sleep(300);
+    animateCount('funnel-3', 986);
+    await sleep(300);
+    animateCount('funnel-4', 384);
+    
+    await sleep(2500);
+    
+    // ROI
+    narrate("💡 Des données claires = des décisions rentables !");
+    document.getElementById('roi-section').classList.remove('hidden');
+    document.getElementById('roi-section').classList.add('fade-in');
+    
+    await sleep(500);
+    animateCount('stat-decisions', 45);
+    animateCount('stat-time', 8);
+    animateCount('stat-revenue', 6200);
+    
+    await sleep(2500);
+    document.getElementById('features').classList.remove('hidden');
+    
+    await sleep(1000);
+    narrate("🚀 Ce dashboard peut vous faire gagner +6 200€/mois. Contactez-moi !");
+    document.getElementById('final-cta').classList.remove('hidden');
+    document.getElementById('final-cta').classList.add('scale-in');
+  }
+  </script>
+
+</body>
+</html>

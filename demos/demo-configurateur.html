@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurateur Produit Pro | Céline Harbane</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{background:#0a0a0f;font-family:system-ui,sans-serif}
+    .gradient-text{background:linear-gradient(135deg,#8b5cf6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gradient-bg{background:linear-gradient(135deg,#8b5cf6,#06b6d4)}
+    .card-glass{background:rgba(18,18,26,0.8);border:1px solid rgba(255,255,255,0.1)}
+    .nav-glass{background:rgba(18,18,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.1)}
+    
+    .fade-in{animation:fadeIn 0.5s ease-out forwards}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    
+    .slide-in-left{animation:slideInLeft 0.5s ease-out forwards}
+    @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+    
+    .scale-in{animation:scaleIn 0.4s ease-out forwards}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+    
+    .pulse-glow{animation:pulseGlow 2s infinite}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(139,92,246,0.3)}50%{box-shadow:0 0 40px rgba(139,92,246,0.6)}}
+    
+    .float{animation:float 3s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+    
+    .color-option{transition:all 0.3s;cursor:pointer}
+    .color-option.active{transform:scale(1.2);box-shadow:0 0 0 3px #8b5cf6,0 0 20px rgba(139,92,246,0.5)}
+    
+    .highlight-box{animation:highlightPulse 1s ease-out}
+    @keyframes highlightPulse{0%{box-shadow:0 0 0 0 rgba(139,92,246,0.7)}70%{box-shadow:0 0 0 15px rgba(139,92,246,0)}100%{box-shadow:0 0 0 0 rgba(139,92,246,0)}}
+    
+    .narrator-box{background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(6,182,212,0.2));border:1px solid rgba(139,92,246,0.3)}
+    
+    .money-rain{position:absolute;animation:moneyFall 2s ease-out forwards;font-size:24px}
+    @keyframes moneyFall{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(100px) rotate(360deg)}}
+    
+    .counter{font-variant-numeric:tabular-nums}
+  </style>
+</head>
+<body class="text-white min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="nav-glass fixed top-0 left-0 right-0 z-40">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="../index.html" class="font-bold text-xl gradient-text">Céline.dev</a>
+      <div class="flex items-center gap-4">
+        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded-full font-medium">MODULE E-COMMERCE</span>
+        <a href="../index.html" class="text-gray-400 hover:text-white text-sm">← Retour</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="pt-24 pb-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <span class="gradient-text">Configurateur</span> Produit Pro
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto mb-6">
+          Module de personnalisation en temps réel pour Shopify & WooCommerce
+        </p>
+        
+        <!-- Control Buttons -->
+        <div class="flex justify-center gap-4">
+          <button id="btn-auto" onclick="startAutoDemo()" class="gradient-bg px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:scale-105 transition">
+            <span>▶️</span> Lancer la démo automatique
+          </button>
+          <button id="btn-reset" onclick="resetDemo()" class="px-6 py-3 rounded-xl font-semibold border border-gray-700 hover:border-purple-500 transition hidden">
+            🔄 Recommencer
+          </button>
+        </div>
+      </div>
+
+      <!-- Demo Container -->
+      <div class="grid lg:grid-cols-2 gap-8">
+        
+        <!-- Left: Product Preview -->
+        <div class="card-glass rounded-3xl p-8 relative overflow-hidden">
+          
+          <!-- Narrator Box -->
+          <div id="narrator" class="narrator-box rounded-xl p-4 mb-6 hidden">
+            <p id="narrator-text" class="text-sm"></p>
+          </div>
+          
+          <!-- Product Preview -->
+          <div id="product-preview" class="bg-gradient-to-br from-white to-gray-100 rounded-2xl p-8 min-h-[300px] flex flex-col items-center justify-center mb-6 relative">
+            
+            <!-- T-Shirt SVG -->
+            <svg id="tshirt" width="180" height="220" viewBox="0 0 200 240" class="float drop-shadow-xl">
+              <path id="tshirt-body" d="M40,60 L20,80 L20,100 L40,90 L40,220 C40,230 50,240 60,240 L140,240 C150,240 160,230 160,220 L160,90 L180,100 L180,80 L160,60 L140,40 C130,30 120,25 100,25 C80,25 70,30 60,40 Z" fill="#ffffff" stroke="#e5e7eb" stroke-width="2"/>
+              <ellipse cx="100" cy="35" rx="25" ry="12" fill="none" stroke="#e5e7eb" stroke-width="2"/>
+              <text id="custom-text" x="100" y="130" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff" opacity="0">TEAM 2024</text>
+            </svg>
+            
+            <!-- Size Badge -->
+            <div id="size-badge" class="absolute top-4 right-4 w-12 h-12 gradient-bg rounded-full flex items-center justify-center font-bold shadow-lg">M</div>
+            
+            <!-- Money Rain Container -->
+            <div id="money-rain" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+            
+          </div>
+          
+          <!-- Price Display -->
+          <div class="flex items-center justify-between p-4 bg-gray-900/50 rounded-xl">
+            <div>
+              <p class="text-gray-400 text-sm">Prix configuré</p>
+              <p id="current-price" class="text-3xl font-bold">29,00 €</p>
+            </div>
+            <div id="price-increase" class="text-right hidden">
+              <p class="text-green-400 text-sm">Valeur ajoutée</p>
+              <p class="text-2xl font-bold text-green-400">+<span id="added-value">0</span> €</p>
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Right: Options & Stats -->
+        <div class="space-y-6">
+          
+          <!-- Step Indicator -->
+          <div id="steps" class="card-glass rounded-2xl p-6 hidden">
+            <div class="flex justify-between items-center">
+              <div id="step-1" class="flex flex-col items-center opacity-30">
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center font-bold mb-2">1</div>
+                <span class="text-xs text-gray-500">Couleur</span>
+              </div>
+              <div class="flex-1 h-1 bg-gray-700 mx-2"></div>
+              <div id="step-2" class="flex flex-col items-center opacity-30">
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center font-bold mb-2">2</div>
+                <span class="text-xs text-gray-500">Taille</span>
+              </div>
+              <div class="flex-1 h-1 bg-gray-700 mx-2"></div>
+              <div id="step-3" class="flex flex-col items-center opacity-30">
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center font-bold mb-2">3</div>
+                <span class="text-xs text-gray-500">Matière</span>
+              </div>
+              <div class="flex-1 h-1 bg-gray-700 mx-2"></div>
+              <div id="step-4" class="flex flex-col items-center opacity-30">
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center font-bold mb-2">4</div>
+                <span class="text-xs text-gray-500">Perso</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Color Options -->
+          <div id="color-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4 flex items-center gap-2">🎨 Couleur</h3>
+            <div class="flex gap-3 justify-center">
+              <button id="color-white" class="color-option w-12 h-12 rounded-xl bg-white shadow-md active"></button>
+              <button id="color-black" class="color-option w-12 h-12 rounded-xl bg-gray-800 shadow-md"></button>
+              <button id="color-navy" class="color-option w-12 h-12 rounded-xl bg-blue-900 shadow-md"></button>
+              <button id="color-red" class="color-option w-12 h-12 rounded-xl bg-red-600 shadow-md relative">
+                <span class="absolute -top-1 -right-1 bg-amber-500 text-black text-[8px] px-1 rounded font-bold">+5€</span>
+              </button>
+              <button id="color-purple" class="color-option w-12 h-12 rounded-xl bg-purple-500 shadow-md relative">
+                <span class="absolute -top-1 -right-1 bg-amber-500 text-black text-[8px] px-1 rounded font-bold">+5€</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Size Options -->
+          <div id="size-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4 flex items-center gap-2">📏 Taille</h3>
+            <div class="grid grid-cols-5 gap-2">
+              <button id="size-xs" class="py-3 rounded-xl border-2 border-gray-700 font-bold">XS</button>
+              <button id="size-s" class="py-3 rounded-xl border-2 border-gray-700 font-bold">S</button>
+              <button id="size-m" class="py-3 rounded-xl border-2 border-purple-500 bg-purple-500/20 font-bold">M</button>
+              <button id="size-l" class="py-3 rounded-xl border-2 border-gray-700 font-bold">L</button>
+              <button id="size-xl" class="py-3 rounded-xl border-2 border-gray-700 font-bold relative">
+                XL
+                <span class="absolute -top-2 -right-2 bg-purple-500 text-[10px] px-1.5 py-0.5 rounded-full">+3€</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Material Options -->
+          <div id="material-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4 flex items-center gap-2">🧵 Matière</h3>
+            <div class="space-y-2">
+              <div id="mat-standard" class="p-3 rounded-xl border-2 border-gray-700 flex justify-between items-center">
+                <span>Coton Standard</span>
+                <span class="text-green-400 text-sm">Inclus</span>
+              </div>
+              <div id="mat-bio" class="p-3 rounded-xl border-2 border-purple-500 bg-purple-500/10 flex justify-between items-center">
+                <span>Coton Bio 🌱</span>
+                <span class="text-green-400 text-sm">Inclus</span>
+              </div>
+              <div id="mat-premium" class="p-3 rounded-xl border-2 border-gray-700 flex justify-between items-center">
+                <span>Premium Blend ✨</span>
+                <span class="text-purple-400 font-bold">+8€</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Personalization -->
+          <div id="perso-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4 flex items-center gap-2">✏️ Personnalisation <span class="text-purple-400 text-sm font-normal">+12€</span></h3>
+            <div class="bg-gray-900/50 rounded-xl p-4">
+              <p id="typing-text" class="text-lg font-mono text-center h-8"></p>
+            </div>
+          </div>
+          
+          <!-- ROI Stats -->
+          <div id="roi-section" class="card-glass rounded-2xl p-6 hidden">
+            <h3 class="font-bold mb-4 flex items-center gap-2">📊 Impact sur votre business</h3>
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="bg-green-500/10 rounded-xl p-4 text-center border border-green-500/30">
+                <p class="text-3xl font-bold text-green-400">+<span id="stat-panier" class="counter">0</span>%</p>
+                <p class="text-gray-400 text-sm">Panier moyen</p>
+              </div>
+              <div class="bg-purple-500/10 rounded-xl p-4 text-center border border-purple-500/30">
+                <p class="text-3xl font-bold text-purple-400">+<span id="stat-conversion" class="counter">0</span>%</p>
+                <p class="text-gray-400 text-sm">Conversion</p>
+              </div>
+            </div>
+            
+            <div class="bg-amber-500/10 rounded-xl p-4 text-center border border-amber-500/30">
+              <p class="text-gray-400 text-sm mb-1">Revenus additionnels estimés / mois</p>
+              <p class="text-4xl font-bold text-amber-400">+<span id="stat-revenue" class="counter">0</span> €</p>
+            </div>
+          </div>
+          
+          <!-- Final CTA -->
+          <div id="final-cta" class="card-glass rounded-2xl p-6 text-center hidden">
+            <h3 class="text-xl font-bold mb-2">🚀 Prêt à booster vos ventes ?</h3>
+            <p class="text-gray-400 mb-4">Ce module s'intègre en quelques jours</p>
+            <a href="../contact.html" class="gradient-bg px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2 hover:scale-105 transition pulse-glow">
+              💬 Demander un devis gratuit
+            </a>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <!-- Features Grid -->
+      <div id="features-grid" class="grid md:grid-cols-4 gap-4 mt-12 hidden">
+        <div class="card-glass rounded-xl p-5 text-center scale-in" style="animation-delay:0.1s">
+          <div class="text-3xl mb-2">⚡</div>
+          <p class="font-bold">Temps réel</p>
+          <p class="text-gray-500 text-sm">Preview instantané</p>
+        </div>
+        <div class="card-glass rounded-xl p-5 text-center scale-in" style="animation-delay:0.2s">
+          <div class="text-3xl mb-2">💰</div>
+          <p class="font-bold">Prix dynamique</p>
+          <p class="text-gray-500 text-sm">Calcul automatique</p>
+        </div>
+        <div class="card-glass rounded-xl p-5 text-center scale-in" style="animation-delay:0.3s">
+          <div class="text-3xl mb-2">📄</div>
+          <p class="font-bold">Export PDF</p>
+          <p class="text-gray-500 text-sm">Bon de production</p>
+        </div>
+        <div class="card-glass rounded-xl p-5 text-center scale-in" style="animation-delay:0.4s">
+          <div class="text-3xl mb-2">🔌</div>
+          <p class="font-bold">Compatible</p>
+          <p class="text-gray-500 text-sm">Shopify & WooCommerce</p>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">
+      © 2024 Céline Harbane | Module E-commerce sur mesure | <a href="../contact.html" class="text-purple-400 hover:underline">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+  /*! © 2024 Céline Harbane - Code protégé */
+  
+  let currentPrice = 29;
+  let addedValue = 0;
+  
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  function showNarrator(text) {
+    const narrator = document.getElementById('narrator');
+    const narratorText = document.getElementById('narrator-text');
+    narrator.classList.remove('hidden');
+    narratorText.textContent = text;
+  }
+  
+  function updatePrice(newPrice) {
+    currentPrice = newPrice;
+    addedValue = newPrice - 29;
+    document.getElementById('current-price').textContent = newPrice.toFixed(2) + ' €';
+    document.getElementById('current-price').classList.add('scale-in');
+    
+    if (addedValue > 0) {
+      document.getElementById('price-increase').classList.remove('hidden');
+      document.getElementById('added-value').textContent = addedValue.toFixed(0);
+    }
+  }
+  
+  function activateStep(stepNum) {
+    const step = document.getElementById('step-' + stepNum);
+    step.classList.remove('opacity-30');
+    step.querySelector('div').classList.remove('bg-gray-700');
+    step.querySelector('div').classList.add('gradient-bg');
+  }
+  
+  function animateCounter(elementId, target, duration = 1500) {
+    const element = document.getElementById(elementId);
+    const start = 0;
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(start + (target - start) * easeOut);
+      element.textContent = current.toLocaleString();
+      
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    requestAnimationFrame(update);
+  }
+  
+  function createMoneyRain() {
+    const container = document.getElementById('money-rain');
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => {
+        const money = document.createElement('span');
+        money.className = 'money-rain';
+        money.textContent = '💰';
+        money.style.left = Math.random() * 80 + 10 + '%';
+        money.style.top = '20%';
+        container.appendChild(money);
+        setTimeout(() => money.remove(), 2000);
+      }, i * 100);
+    }
+  }
+  
+  async function startAutoDemo() {
+    document.getElementById('btn-auto').classList.add('hidden');
+    document.getElementById('btn-reset').classList.remove('hidden');
+    
+    document.getElementById('steps').classList.remove('hidden');
+    document.getElementById('steps').classList.add('fade-in');
+    
+    await sleep(500);
+    
+    // STEP 1: COLOR
+    showNarrator("👆 Le client choisit sa couleur préférée parmi une large palette...");
+    activateStep(1);
+    document.getElementById('color-section').classList.remove('hidden');
+    document.getElementById('color-section').classList.add('slide-in-left');
+    
+    await sleep(2000);
+    
+    document.getElementById('color-white').classList.remove('active');
+    document.getElementById('color-red').classList.add('active');
+    document.getElementById('color-red').classList.add('highlight-box');
+    document.getElementById('tshirt-body').style.fill = '#dc2626';
+    
+    showNarrator("🔴 Il choisit une couleur PREMIUM → +5€ automatiquement ajoutés !");
+    updatePrice(34);
+    
+    await sleep(2500);
+    
+    // STEP 2: SIZE
+    showNarrator("📏 Sélection de la taille avec guide intégré...");
+    activateStep(2);
+    document.getElementById('size-section').classList.remove('hidden');
+    document.getElementById('size-section').classList.add('slide-in-left');
+    
+    await sleep(2000);
+    
+    document.getElementById('size-m').classList.remove('border-purple-500', 'bg-purple-500/20');
+    document.getElementById('size-m').classList.add('border-gray-700');
+    document.getElementById('size-xl').classList.add('border-purple-500', 'bg-purple-500/20', 'highlight-box');
+    document.getElementById('size-badge').textContent = 'XL';
+    
+    showNarrator("📐 Taille XL sélectionnée → +3€ (grande taille)");
+    updatePrice(37);
+    
+    await sleep(2500);
+    
+    // STEP 3: MATERIAL
+    showNarrator("🧵 Choix de la matière pour plus de confort...");
+    activateStep(3);
+    document.getElementById('material-section').classList.remove('hidden');
+    document.getElementById('material-section').classList.add('slide-in-left');
+    
+    await sleep(2000);
+    
+    document.getElementById('mat-bio').classList.remove('border-purple-500', 'bg-purple-500/10');
+    document.getElementById('mat-bio').classList.add('border-gray-700');
+    document.getElementById('mat-premium').classList.add('border-purple-500', 'bg-purple-500/10', 'highlight-box');
+    
+    showNarrator("✨ Matière Premium Blend → +8€ pour une qualité supérieure !");
+    updatePrice(45);
+    
+    await sleep(2500);
+    
+    // STEP 4: PERSONALIZATION
+    showNarrator("✏️ Et maintenant, la personnalisation qui fait la différence...");
+    activateStep(4);
+    document.getElementById('perso-section').classList.remove('hidden');
+    document.getElementById('perso-section').classList.add('slide-in-left');
+    
+    await sleep(1500);
+    
+    const text = "TEAM 2024";
+    const typingEl = document.getElementById('typing-text');
+    const customText = document.getElementById('custom-text');
+    
+    for (let i = 0; i <= text.length; i++) {
+      typingEl.textContent = text.substring(0, i) + "▌";
+      customText.textContent = text.substring(0, i);
+      customText.style.opacity = 1;
+      await sleep(150);
+    }
+    typingEl.textContent = text;
+    
+    showNarrator("🎨 Texte personnalisé ajouté → +12€ de valeur perçue énorme !");
+    updatePrice(57);
+    
+    await sleep(2500);
+    
+    // FINAL: ROI
+    showNarrator("📈 Résultat : Panier passé de 29€ à 57€ soit +96% de valeur !");
+    
+    document.getElementById('roi-section').classList.remove('hidden');
+    document.getElementById('roi-section').classList.add('fade-in');
+    
+    await sleep(500);
+    
+    animateCounter('stat-panier', 45);
+    await sleep(300);
+    animateCounter('stat-conversion', 28);
+    await sleep(300);
+    animateCounter('stat-revenue', 4850);
+    
+    createMoneyRain();
+    
+    await sleep(2000);
+    
+    document.getElementById('features-grid').classList.remove('hidden');
+    
+    await sleep(1000);
+    
+    showNarrator("🚀 Ce module peut transformer votre boutique. Contactez-moi pour un devis !");
+    document.getElementById('final-cta').classList.remove('hidden');
+    document.getElementById('final-cta').classList.add('scale-in');
+  }
+  
+  function resetDemo() {
+    location.reload();
+  }
+  </script>
+
+</body>
+</html>
